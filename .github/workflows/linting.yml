@@ -5,8 +5,8 @@ on:
   pull_request:
 
 jobs:
-  setup:
-    name: Setup
+  lint-typescript:
+    name: Run typescript linter
     runs-on: ubuntu-latest
 
     steps:
@@ -16,22 +16,13 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
-
-  lint-typescript:
-    name: Run typescript linter
-    needs: setup
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+        run: npm ci
 
       - name: Run ESLint on TypeScript files
         run: npx eslint "**/*.ts"
@@ -41,12 +32,22 @@ jobs:
 
   lint-solidity:
     name: Run solidity linter
-    needs: setup
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run Solhint on Solidity files
         run: npx solhint "contracts/**/*.sol"
