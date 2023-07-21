@@ -10,6 +10,13 @@ const config: HardhatUserConfig = {
             },
         },
     },
+    networks: {
+        hardhat: {
+            accounts: {
+                count: 5,
+            }
+        }
+    }
 };
 
 export default config;
