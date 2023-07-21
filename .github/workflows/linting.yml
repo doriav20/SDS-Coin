@@ -1,0 +1,28 @@
+name: Run linting
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint on TypeScript files
+        run: npx eslint "**/*.ts"
+
+      - name: Run Prettier on TypeScript files
+        run: npx prettier --check "**/*.ts"
+
+      - name: Run Solhint on Solidity files
+        run: npx solhint "contracts/**/*.sol"
+
+      - name: Run Prettier on Solidity files
+        run: npx prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
