@@ -3,6 +3,9 @@ name: Run linting
 on:
   workflow_dispatch:
   pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   lint-typescript:
