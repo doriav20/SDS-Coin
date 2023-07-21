@@ -4,8 +4,8 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    name: Linting
+  lint-typescript:
+    name: Run typescript linter
     runs-on: ubuntu-latest
 
     steps:
@@ -20,6 +20,17 @@ jobs:
 
       - name: Run Prettier on TypeScript files
         run: npx prettier --check "**/*.ts"
+
+  lint-solidity:
+    name: Run solidity linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Run Solhint on Solidity files
         run: npx solhint "contracts/**/*.sol"
