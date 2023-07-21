@@ -53,7 +53,12 @@ jobs:
         run: npm ci
 
       - name: Run Solhint on Solidity files
-        run: npx solhint "contracts/**/*.sol"
+        run: |
+          solhint_output=$(npx solhint "contracts/**/*.sol")
+          echo "$solhint_output"
+          if [ -n "$solhint_output" ]; then
+            exit 1
+          fi
 
       - name: Run Prettier on Solidity files
         run: npx prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
