@@ -12,6 +12,7 @@ describe("SDSToken", function () {
   });
 
   it("Test contract name", async function () {
-    expect(await instance.name()).to.equal("SDSToken");
+    const contractName = await instance.name();
+    expect(contractName).to.equal("SDSToken");
   });
 });
