@@ -3,9 +3,9 @@ import { ethers } from "hardhat";
 import { SDSToken } from "../typechain-types";
 
 describe("SDSToken", function () {
-  let instance: SDSToken
+  let instance: SDSToken;
 
-  beforeEach(async function() {
+  beforeEach(async function () {
     const ContractFactory = await ethers.getContractFactory("SDSToken");
     instance = await ContractFactory.deploy();
     await instance.waitForDeployment();
@@ -17,7 +17,6 @@ describe("SDSToken", function () {
   });
 
   it("Test mint500", async function () {
-
     const signer = (await ethers.getSigners())[0];
 
     const signerAddress = await signer.getAddress();
