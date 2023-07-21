@@ -5,6 +5,12 @@
       "error",
       "^0.8.9"
     ],
-    "no-empty-blocks": "off"
+    "no-empty-blocks": "off",
+    "func-visibility": [
+      "warn",
+      {
+        "ignoreConstructors": true
+      }
+    ]
   }
 }
