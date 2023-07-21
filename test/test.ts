@@ -1,13 +1,17 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { SDSToken } from "../typechain-types";
 
 describe("SDSToken", function () {
-  it("Test contract", async function () {
+  let instance: SDSToken
+
+  beforeEach(async function() {
     const ContractFactory = await ethers.getContractFactory("SDSToken");
-
-    const instance = await ContractFactory.deploy();
+    instance = await ContractFactory.deploy();
     await instance.waitForDeployment();
+  });
 
+  it("Test contract name", async function () {
     expect(await instance.name()).to.equal("SDSToken");
   });
 });
