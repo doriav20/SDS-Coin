@@ -30,7 +30,7 @@ contract SDSToken is ERC20, Ownable {
 
         mint(treasury, fee); // Mint a portion of transaction fees to the treasury
 
-        return super.transferFrom(sender, recipient, amountAfterFee);
+        return super.transferFrom(from, to, amountAfterFee);
     }
 
     function claimReward() public {
