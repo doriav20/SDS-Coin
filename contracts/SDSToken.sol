@@ -7,8 +7,11 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 contract SDSToken is ERC20, Ownable {
     constructor() ERC20("SDSToken", "SDS") {}
 
-    // Note: this function is only for testing purposes
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
     function mint500(address to) public onlyOwner {
-        _mint(to, 500);
+        mint(to, 500);
     }
 }
