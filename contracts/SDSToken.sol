@@ -5,7 +5,48 @@ import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SDSToken is ERC20, Ownable {
-    constructor() ERC20("SDSToken", "SDS") {}
+    uint256 public constant dailyReward = 10; // The number of tokens a user can claim per day
+    uint256 public constant transactionFeePercentage = 2; // 2%
+    address public treasury;
+
+    mapping(address => uint256) private _lastClaim;
+
+    constructor() ERC20("SDSToken", "SDS") {
+        treasury = msg.sender;
+    }
+
+    function transfer(address to, uint256 amount) public override returns (bool) {
+        uint256 fee = calculateTransactionFee(amount);
+        uint256 amountAfterFee = amount - fee;
+
+        mint(treasury, fee); // Mint a portion of transaction fees to the treasury
+
+        return super.transfer(to, amountAfterFee);
+    }
+
+    function transferFrom(address from, address to, uint256 amount) public override returns (bool) {
+        uint256 fee = calculateTransactionFee(amount);
+        uint256 amountAfterFee = amount - fee;
+
+        mint(treasury, fee); // Mint a portion of transaction fees to the treasury
+
+        return super.transferFrom(sender, recipient, amountAfterFee);
+    }
+
+    function claimReward() public {
+        require(canClaim(msg.sender), "Reward already claimed within 24 hours");
+
+        mint(msg.sender, dailyReward); // Mint daily reward
+        _lastClaim[msg.sender] = block.timestamp; // Update the last claim time
+    }
+
+    function canClaim(address account) public view returns (bool) {
+        return _lastClaim[account] + 1 days <= block.timestamp; // Check if 24 hours have passed since last claim
+    }
+
+    function calculateTransactionFee(uint256 amount) private view returns (uint256) {
+        return (amount * transactionFeePercentage) / 100;
+    }
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
