@@ -44,7 +44,7 @@ contract SDSToken is ERC20, Ownable {
         return _lastClaim[account] + 1 days <= block.timestamp; // Check if 24 hours have passed since last claim
     }
 
-    function calculateTransactionFee(uint256 amount) private view returns (uint256) {
+    function calculateTransactionFee(uint256 amount) private pure returns (uint256) {
         return (amount * transactionFeePercentage) / 100;
     }
 
