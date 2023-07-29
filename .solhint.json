@@ -5,6 +5,12 @@
       "error",
       "^0.8.9"
     ],
+    "reason-string": [
+      "warn",
+      {
+        "maxLength": 64
+      }
+    ],
     "no-empty-blocks": "off",
     "func-visibility": [
       "warn",
