@@ -12,7 +12,7 @@ contract SDSToken is ERC20, Ownable {
     mapping(address => uint256) private _lastClaim;
 
     constructor() ERC20("SDSToken", "SDS") {
-        treasury = msg.sender;
+        treasury = _msgSender();
     }
 
     function transfer(address to, uint256 amount) public override returns (bool) {
