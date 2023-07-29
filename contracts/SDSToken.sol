@@ -5,8 +5,8 @@ import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SDSToken is ERC20, Ownable {
-    uint256 public constant dailyReward = 10; // The number of tokens a user can claim per day
-    uint256 public constant transactionFeePercentage = 2; // 2%
+    uint256 public constant DAILY_REWARD = 10; // The number of tokens a user can claim per day
+    uint256 public constant TRANSACTION_FEE_PERCENTAGE = 2; // 2%
     address public treasury;
 
     mapping(address => uint256) private _lastClaim;
