@@ -36,7 +36,7 @@ contract SDSToken is ERC20, Ownable {
     function claimReward() public {
         require(canClaim(msg.sender), "Reward already claimed within 24 hours");
 
-        mint(msg.sender, dailyReward); // Mint daily reward
+        mint(msg.sender, DAILY_REWARD); // Mint daily reward
         _lastClaim[msg.sender] = block.timestamp; // Update the last claim time
     }
 
@@ -45,7 +45,7 @@ contract SDSToken is ERC20, Ownable {
     }
 
     function calculateTransactionFee(uint256 amount) private pure returns (uint256) {
-        return (amount * transactionFeePercentage) / 100;
+        return (amount * TRANSACTION_FEE_PERCENTAGE) / 100;
     }
 
     function mint(address to, uint256 amount) public onlyOwner {
