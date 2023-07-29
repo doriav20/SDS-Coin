@@ -14,4 +14,8 @@ contract SDSToken is ERC20, Ownable {
     function mint500(address to) public onlyOwner {
         mint(to, 500);
     }
+
+    function myBalance() public view returns (uint256) {
+        return balanceOf(msg.sender);
+    }
 }
