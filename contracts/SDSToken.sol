@@ -16,6 +16,6 @@ contract SDSToken is ERC20, Ownable {
     }
 
     function myBalance() public view returns (uint256) {
-        return balanceOf(msg.sender);
+        return balanceOf(_msgSender());
     }
 }
