@@ -1,4 +1,4 @@
-export const SDSTokenABI = [
+export const ABI = [
     {
         "inputs": [],
         "stateMutability": "nonpayable",
