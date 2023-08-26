@@ -25,6 +25,6 @@ describe("SDSToken", function () {
 
         const signerBalance = await instance.balanceOf(signerAddress);
 
-        expect(signerBalance).to.equal(500);
+        expect(signerBalance).to.equal(500 * 1e18);
     });
 });
