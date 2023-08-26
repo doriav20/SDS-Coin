@@ -1,5 +1,5 @@
 import './App.css';
-import { BalanceDisplay } from "./useMyBalance";
+import { BalanceDisplay } from "../../hooks/useMyBalance";
 
 function App() {
   return (
