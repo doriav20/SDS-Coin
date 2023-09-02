@@ -62,3 +62,32 @@ jobs:
 
       - name: Run Prettier on Solidity files
         run: npx prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
+
+  lint-react:
+    name: Run React linter
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache node modules for frontend
+        uses: actions/cache@v2
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-frontend-node-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-frontend-node-
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Run ESLint on React files
+        run: npx eslint "src/**/*.{js,jsx,ts,tsx}"
+
+      - name: Run Prettier on React files
+        run: npx prettier --check "src/**/*.{js,jsx,ts,tsx}"
