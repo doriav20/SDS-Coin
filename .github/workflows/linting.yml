@@ -28,7 +28,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint on TypeScript files
-        run: npx eslint "**/*.ts" --ignore-pattern "frontend/**"
+        run: npx eslint "**/*.ts"
 
       - name: Run Prettier on TypeScript files
         run: npx prettier --check "**/*.ts"
