@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import {ABI, CONTRACT_ADDRESS} from "./constants";
 import {isValueSet, visualizeNumber} from "../utils";
 
-export function useMyBalance() {
+export function useBalance() {
   const [balance, setBalance] = useState(null);
   const [decimals, setDecimals] = useState(null);
 
@@ -41,7 +41,7 @@ export function useMyBalance() {
 }
 
 export function BalanceDisplayDiv() {
-  const { balance, decimals } = useMyBalance();
+  const { balance, decimals } = useBalance();
 
   let readableBalance = null;
 
