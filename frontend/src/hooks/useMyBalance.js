@@ -41,7 +41,7 @@ export function useMyBalance() {
 }
 
 export function BalanceDisplayDiv() {
-  const { balance, fetchBalance, decimals } = useMyBalance();
+  const { balance, decimals } = useMyBalance();
 
   let readableBalance = null;
 
