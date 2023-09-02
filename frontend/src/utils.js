@@ -18,3 +18,7 @@ export function visualizeNumber(value, decimals) {
 
     return `${integerPart}.${fractionalString}`;
 }
+
+export function noop(...args) {
+    
+}
