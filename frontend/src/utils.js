@@ -20,5 +20,9 @@ export function visualizeNumber(value, decimals) {
 }
 
 export function noop(...args) {
-    
+
+}
+
+export function secondsToMilliseconds(seconds) {
+    return seconds * 1000;
 }
