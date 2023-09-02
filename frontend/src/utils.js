@@ -3,6 +3,9 @@ export function isValueSet(elm) {
 }
 
 export function visualizeNumber(value, decimals) {
+    if (!isValueSet(value) || !isValueSet(decimals)) {
+        return null;
+    }
     const integerPart = value / (10n ** decimals);
     const fractionalPart = value % (10n ** decimals);
 
