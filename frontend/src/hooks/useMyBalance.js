@@ -52,7 +52,6 @@ export function BalanceDisplay() {
 
   return (
     <div>
-      <button onClick={fetchBalance}>Check Balance</button>
       {readableBalance && <p>Your balance: {readableBalance} SDS</p>}
     </div>
   );
