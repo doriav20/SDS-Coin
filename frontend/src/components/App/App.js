@@ -1,11 +1,11 @@
 import './App.css';
-import { BalanceDisplay } from "../../hooks/useMyBalance";
+import { BalanceDisplayDiv } from "../../hooks/useMyBalance";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BalanceDisplay />
+        <BalanceDisplayDiv />
       </header>
     </div>
   );

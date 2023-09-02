@@ -40,7 +40,7 @@ export function useMyBalance() {
   return { balance, fetchBalance, decimals };
 }
 
-export function BalanceDisplay() {
+export function BalanceDisplayDiv() {
   const { balance, fetchBalance, decimals } = useMyBalance();
 
   let readableBalance = null;
