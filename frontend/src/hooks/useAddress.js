@@ -1,9 +1,8 @@
-import {useEffect, useState} from "react";
-import {useEthereum} from "./useEthereum";
-import {noop} from "../utils";
+import { useEffect, useState } from 'react';
+import { useEthereum } from './useEthereum';
 
 export function useAddress() {
-    const {signer} = useEthereum();
+    const { signer } = useEthereum();
     const [address, setAddress] = useState(null);
 
     useEffect(() => {
@@ -14,7 +13,7 @@ export function useAddress() {
             }
         }
 
-        fetchAddress().then(noop);
+        fetchAddress();
     }, [signer]);
 
     return address;

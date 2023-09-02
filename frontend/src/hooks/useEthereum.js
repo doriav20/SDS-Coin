@@ -1,14 +1,13 @@
-import {createContext, useContext, useEffect, useState} from 'react';
-import {ethers} from 'ethers';
-import {ABI, CONTRACT_ADDRESS} from "./constants";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { ABI, CONTRACT_ADDRESS } from './constants';
 
 const EthereumContext = createContext(null);
 
-export function EthereumProvider({children}) {
+export function EthereumProvider({ children }) {
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
     const [contract, setContract] = useState(null);
-
 
     useEffect(() => {
         if (window.ethereum) {
@@ -23,11 +22,7 @@ export function EthereumProvider({children}) {
         }
     }, []);
 
-    return (
-        <EthereumContext.Provider value={{provider, signer, contract}}>
-            {children}
-        </EthereumContext.Provider>
-    );
+    return <EthereumContext.Provider value={{ provider, signer, contract }}>{children}</EthereumContext.Provider>;
 }
 
 export function useEthereum() {

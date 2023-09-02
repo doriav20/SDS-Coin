@@ -1,13 +1,13 @@
 import './App.css';
-import {AccountDetailsDisplay} from "../EthereumAccountDetails/AccountDetailsDisplay";
-import {EthereumProvider} from "../../hooks/useEthereum";
+import { AccountDetailsDisplay } from '../EthereumAccountDetails/AccountDetailsDisplay';
+import { EthereumProvider } from '../../hooks/useEthereum';
 
 function App() {
     return (
         <div className="App">
             <header className="App-header">
                 <EthereumProvider>
-                    <AccountDetailsDisplay/>
+                    <AccountDetailsDisplay />
                 </EthereumProvider>
             </header>
         </div>
