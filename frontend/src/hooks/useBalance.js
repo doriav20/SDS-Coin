@@ -1,9 +1,9 @@
-import {useEthereum} from "./useEthereum";
-import {useEffect, useState} from "react";
-import {noop, secondsToMilliseconds} from "../utils";
+import { useEthereum } from './useEthereum';
+import { useEffect, useState } from 'react';
+import { secondsToMilliseconds } from '../utils';
 
 export function useBalance() {
-    const {contract} = useEthereum();
+    const { contract } = useEthereum();
     const [balance, setBalance] = useState(null);
     const [decimals, setDecimals] = useState(null);
 
@@ -18,10 +18,10 @@ export function useBalance() {
             }
         }
 
-        fetchBalanceAndDecimals().then(noop);
+        fetchBalanceAndDecimals();
         const intervalId = setInterval(fetchBalanceAndDecimals, secondsToMilliseconds(5)); // Fetching both balance and decimals every 5 seconds
         return () => clearInterval(intervalId);
     }, [contract]);
 
-    return {balance, decimals};
+    return { balance, decimals };
 }
