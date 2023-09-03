@@ -14,11 +14,19 @@ export function EthereumProvider({ children }) {
             const newProvider = new ethers.BrowserProvider(window.ethereum);
             setProvider(newProvider);
 
-            newProvider.getSigner().then((newSigner) => {
-                setSigner(newSigner);
-                const newContract = new ethers.Contract(CONTRACT_ADDRESS, ABI, newSigner);
-                setContract(newContract);
-            });
+            newProvider
+                .getSigner()
+                .then((newSigner) => {
+                    setSigner(newSigner);
+                    const newContract = new ethers.Contract(CONTRACT_ADDRESS, ABI, newSigner);
+                    setContract(newContract);
+                })
+                .catch(() => {
+                    alert('Please allow access for the app to work');
+                    setProvider(null);
+                    setSigner(null);
+                    setContract(null);
+                });
         }
     }, []);
 
