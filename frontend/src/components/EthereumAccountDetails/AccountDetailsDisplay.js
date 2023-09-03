@@ -4,7 +4,7 @@ import { AccountAddressDisplayDiv } from './AccountAddressDisplayDiv';
 export function AccountDetailsDisplay() {
     return (
         <>
-            <BalanceDisplayDiv />
+            <BalanceDisplayDiv currency={'SDS'} />
             <AccountAddressDisplayDiv />
         </>
     );
