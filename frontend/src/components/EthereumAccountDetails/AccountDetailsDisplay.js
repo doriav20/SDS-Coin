@@ -4,8 +4,14 @@ import { AccountAddressDisplayDiv } from './AccountAddressDisplayDiv';
 export function AccountDetailsDisplay() {
     return (
         <>
-            <BalanceDisplayDiv currency={'SDS'} />
-            <AccountAddressDisplayDiv />
+            <div>
+                <span>Balance: </span>
+                <BalanceDisplayDiv currency={'SDS'} style={{ display: 'inline-block' }} />
+            </div>
+            <div>
+                <span>Address: </span>
+                <AccountAddressDisplayDiv style={{ display: 'inline-block' }} />
+            </div>
         </>
     );
 }
