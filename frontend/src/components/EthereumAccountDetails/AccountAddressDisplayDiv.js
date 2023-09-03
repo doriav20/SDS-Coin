@@ -1,11 +1,11 @@
 import { useAddress } from '../../hooks/useAddress';
 
-export function AccountAddressDisplayDiv() {
+export function AccountAddressDisplayDiv({ style }) {
     const address = useAddress();
 
     return (
         <>
-            <div>{address && <p>{address}</p>}</div>
+            <div style={style}>{address && <p>{address}</p>}</div>
         </>
     );
 }
