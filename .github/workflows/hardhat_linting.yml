@@ -59,8 +59,9 @@ jobs:
       - name: Run Solhint on Solidity files
         run: |
           solhint_output=$(npx solhint "contracts/**/*.sol")
-          echo "$solhint_output"
-          if [ -n "$solhint_output" ]; then
+          trimmed_output=$(echo "$solhint_output" | sed 's/^[ \t\n]*//;s/[ \t\n]*$//')
+          echo "$trimmed_output"
+          if [ -n "$trimmed_output" ]; then
             exit 1
           fi
         working-directory: hardhat
