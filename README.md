@@ -1,35 +1,56 @@
 # SDS Coin Project
 
+This project includes a Hardhat setup for smart contract development and a React frontend application for user
+interaction.
+
 ## Table of Contents
+
 1. [Setup Instructions](#setup-instructions)
-2. [Running the Application](#running-the-application)
-3. [Testing the Application](#testing-the-application)
-4. [Linting Your Code](#linting-your-code)
-5. [Formatting Your Code](#formatting-your-code)
+2. [Running the Smart Contract](#running-the-smart-contract)
+3. [Running the Frontend](#running-the-frontend)
+4. [Testing the Application](#testing-the-application)
+5. [Linting Your Code](#linting-your-code)
+6. [Formatting Your Code](#formatting-your-code)
 
 ## Setup Instructions
 
 To setup the project, follow these steps:
 
 1. Install the latest version of [Node.js (v18)](https://nodejs.org/dist/latest-v18.x/).
-2. Clone the repository using the command:
+2. Clone the repository:
     ```
     git clone "https://github.com/doriav20/SDS-Coin.git"
     ```
-3. Navigate to the project directory. Replace `{project_dir}` with the actual directory path.
+3. Navigate to the project directory:
     ```
-    cd {project_dir}
+    cd SDS-Coin
     ```
-4. Install the required dependencies:
+
+### Hardhat Setup
+
+1. Navigate to the Hardhat directory:
+    ```
+    cd hardhat
+    ```
+2. Install the required dependencies:
     ```
     npm install
     ```
 
-## Running the Application
+### Frontend Setup
 
-To run the project:
+1. Navigate to the frontend directory from the main project directory:
+    ```
+    cd frontend
+    ```
+2. Install the required dependencies:
+    ```
+    npm install
+    ```
 
-1. Access your local filesystem from the Remix IDE:
+## Running the Smart Contract
+
+1. From the `hardhat` directory, access your local filesystem from the Remix IDE:
     ```
     npx remixd
     ```
@@ -37,41 +58,100 @@ To run the project:
     ```
     npx hardhat node
     ```
-3. Now, open the [Remix IDE](https://remix.ethereum.org/), compile the `SDSToken.sol` file located in `contracts/SDSToken.sol`, and select `Dev - Hardhat Provider` from the `ENVIRONMENT` options.
+3. Now, open the [Remix IDE](https://remix.ethereum.org/), compile the `SDSToken.sol` file located
+   in `contracts/SDSToken.sol`, and select `Dev - Hardhat Provider` from the `ENVIRONMENT` options.
+
+## Running the Frontend
+
+From the `frontend` directory:
+
+1. Start the React application:
+    ```
+    npm start
+    ```
+
+2. Once started, the application should automatically open in your default web browser. If not, you can manually
+   navigate to:
+    ```
+    http://localhost:3000/
+    ```
+   in your web browser to view the application.
 
 ## Testing the Application
 
-To run the tests located in the `test` folder, use the following command:
+### Smart Contract Tests
+
+From the `hardhat` directory:
+
+```
+npm test
+```
+
+### Frontend Tests
+
+From the `frontend` directory:
+
 ```
 npm test
 ```
 
 ## Linting Your Code
 
-The project uses solhint for Solidity files and ESLint for TypeScript files.
+### Solidity Linting (Hardhat)
 
-To lint Solidity files:
+From the `hardhat` directory:
+
 ```
 npx solhint "contracts/**/*.sol"
 ```
 
-To lint TypeScript files:
+### TypeScript Linting (Hardhat)
+
+From the `hardhat` directory:
+
 ```
 npx eslint "**/*.ts"
 ```
 
+### JavaScript and JSX Linting (Frontend)
+
+From the `frontend` directory:
+
+```
+npm run lint
+```
+
+Got it! Here's the updated section with the note adjusted for clarity:
+
 ## Formatting Your Code
 
-The project uses Prettier for code formatting. The following commands will format Solidity and TypeScript files.
+### Solidity Formatting (Hardhat)
 
-To format Solidity files:
+From the `hardhat` directory:
+
 ```
 npx prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
 ```
 
-To format TypeScript files:
+**Note:** If you wish to check the format of Solidity files without applying changes, replace `--write` with `--check`
+in the above command.
+
+### TypeScript Formatting (Hardhat)
+
+From the `hardhat` directory:
+
 ```
 npx prettier --write "**/*.ts"
 ```
 
-**Note:** If you wish to check the format without applying changes, replace `--write` with `--check` in the above commands.
+**Note:** If you wish to check the format of TypeScript files without applying changes, replace `--write` with `--check`
+in the above command.
+
+### JavaScript and JSX Formatting (Frontend)
+
+From the `frontend` directory:
+
+```
+npm run format
+```
+
