@@ -1,11 +1,11 @@
 import useAddress from '../../hooks/useAddress';
 
-export default function AccountAddressDisplayDiv({ style }) {
+export default function AccountAddressDisplay({ ...props }) {
     const address = useAddress();
 
     return (
         <>
-            <div style={style}>{address && <p>{address}</p>}</div>
+            <div {...props}>{address && <p>{address}</p>}</div>
         </>
     );
 }

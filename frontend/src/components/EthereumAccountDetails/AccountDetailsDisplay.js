@@ -1,17 +1,17 @@
-import BalanceDisplayDiv from './BalanceDisplayDiv';
-import AccountAddressDisplayDiv from './AccountAddressDisplayDiv';
+import BalanceDisplay from './BalanceDisplay';
+import AccountAddressDisplay from './AccountAddressDisplay';
 
-export default function AccountDetailsDisplay() {
+export default function AccountDetailsDisplay({ ...props }) {
     return (
-        <>
+        <div {...props}>
             <div>
                 <span>Balance: </span>
-                <BalanceDisplayDiv currency={'SDS'} style={{ display: 'inline-block' }} />
+                <BalanceDisplay currency={'SDS'} style={{ display: 'inline-block' }} />
             </div>
             <div>
                 <span>Address: </span>
-                <AccountAddressDisplayDiv style={{ display: 'inline-block' }} />
+                <AccountAddressDisplay style={{ display: 'inline-block' }} />
             </div>
-        </>
+        </div>
     );
 }

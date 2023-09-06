@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Outlet, useLocation } from 'react-router-dom';
+import BalanceDisplay from '../EthereumAccountDetails/BalanceDisplay';
 
 function ActiveNavLink({ children, href, ...props }) {
     const location = useLocation();
@@ -19,7 +20,7 @@ function ActiveNavLink({ children, href, ...props }) {
         </Nav.Link>
     );
 }
-function MainNavbar() {
+function MainNavbar({ children }) {
     return (
         <div className="App">
             <header>
@@ -36,6 +37,7 @@ function MainNavbar() {
                             <ActiveNavLink href="/game2">Game 2</ActiveNavLink>
                         </Nav>
                     </Container>
+                    {children}
                 </Navbar>
             </header>
         </div>
@@ -45,7 +47,9 @@ function MainNavbar() {
 export default function AppNavbar() {
     return (
         <>
-            <MainNavbar />
+            <MainNavbar>
+                <BalanceDisplay currency={'SDS'} className="text-light me-3 fs-5" />
+            </MainNavbar>
             <Outlet />
         </>
     );
