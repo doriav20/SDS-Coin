@@ -1,9 +1,9 @@
 import BalanceDisplay from './BalanceDisplay';
 import AccountAddressDisplay from './AccountAddressDisplay';
 
-export default function AccountDetailsDisplay() {
+export default function AccountDetailsDisplay({ ...props }) {
     return (
-        <>
+        <div {...props}>
             <div>
                 <span>Balance: </span>
                 <BalanceDisplay currency={'SDS'} style={{ display: 'inline-block' }} />
@@ -12,6 +12,6 @@ export default function AccountDetailsDisplay() {
                 <span>Address: </span>
                 <AccountAddressDisplay style={{ display: 'inline-block' }} />
             </div>
-        </>
+        </div>
     );
 }
