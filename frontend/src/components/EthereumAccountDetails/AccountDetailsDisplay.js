@@ -1,7 +1,7 @@
-import { BalanceDisplayDiv } from './BalanceDisplayDiv';
-import { AccountAddressDisplayDiv } from './AccountAddressDisplayDiv';
+import BalanceDisplayDiv from './BalanceDisplayDiv';
+import AccountAddressDisplayDiv from './AccountAddressDisplayDiv';
 
-export function AccountDetailsDisplay() {
+export default function AccountDetailsDisplay() {
     return (
         <>
             <div>

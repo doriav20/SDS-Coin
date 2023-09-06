@@ -2,7 +2,7 @@ import { useEthereum } from './useEthereum';
 import { useEffect, useState } from 'react';
 import { secondsToMilliseconds } from '../utils';
 
-export function useBalance() {
+export default function useBalance() {
     const { contract } = useEthereum();
     const [balance, setBalance] = useState(null);
     const [decimals, setDecimals] = useState(null);
