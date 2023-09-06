@@ -19,7 +19,7 @@ function ActiveNavLink({ children, href, ...props }) {
         </Nav.Link>
     );
 }
-function MainNavbar() {
+function MainNavbar({ children }) {
     return (
         <div className="App">
             <header>
@@ -36,6 +36,7 @@ function MainNavbar() {
                             <ActiveNavLink href="/game2">Game 2</ActiveNavLink>
                         </Nav>
                     </Container>
+                    {children}
                 </Navbar>
             </header>
         </div>
