@@ -6,12 +6,14 @@ import AppNavbar from '../AppNavbar/AppNavbar';
 function App() {
     return (
         <div className="App">
-            <AppNavbar />
-            <header className="App-header">
+            <header>
+                <AppNavbar />
+            </header>
+            <div className="App-header">
                 <EthereumProvider>
                     <AccountDetailsDisplay />
                 </EthereumProvider>
-            </header>
+            </div>
         </div>
     );
 }
