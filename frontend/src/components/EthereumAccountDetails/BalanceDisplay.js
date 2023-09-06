@@ -1,7 +1,7 @@
 import useBalance from '../../hooks/useBalance';
 import { visualizeNumber } from '../../utils';
 
-export default function BalanceDisplayDiv({ currency, ...props }) {
+export default function BalanceDisplay({ currency, ...props }) {
     const { balance, decimals } = useBalance();
 
     let readableBalance = visualizeNumber(balance, decimals);

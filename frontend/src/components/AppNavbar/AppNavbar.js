@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Outlet, useLocation } from 'react-router-dom';
-import BalanceDisplayDiv from '../EthereumAccountDetails/BalanceDisplayDiv';
+import BalanceDisplay from '../EthereumAccountDetails/BalanceDisplay';
 
 function ActiveNavLink({ children, href, ...props }) {
     const location = useLocation();
@@ -48,7 +48,7 @@ export default function AppNavbar() {
     return (
         <>
             <MainNavbar>
-                <BalanceDisplayDiv currency={'SDS'} className="text-light me-3 fs-5" />
+                <BalanceDisplay currency={'SDS'} className="text-light me-3 fs-5" />
             </MainNavbar>
             <Outlet />
         </>
