@@ -24,7 +24,7 @@ function MainNavbar() {
         <div className="App">
             <header>
                 <Navbar bg="dark" data-bs-theme="dark">
-                    <Container>
+                    <Container className="me-auto ms-3" style={{ margin: 'inherit' }}>
                         <Navbar.Brand href="/">SDS Token</Navbar.Brand>
                         <Nav className="me-auto">
                             <ActiveNavLink href="/details">Wallet Details</ActiveNavLink>
