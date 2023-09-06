@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useEthereum } from './useEthereum';
 
-export function useAddress() {
+export default function useAddress() {
     const { signer } = useEthereum();
     const [address, setAddress] = useState(null);
 

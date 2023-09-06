@@ -1,6 +1,6 @@
-import { useAddress } from '../../hooks/useAddress';
+import useAddress from '../../hooks/useAddress';
 
-export function AccountAddressDisplayDiv({ style }) {
+export default function AccountAddressDisplayDiv({ style }) {
     const address = useAddress();
 
     return (

@@ -1,5 +1,5 @@
 import './App.css';
-import { AccountDetailsDisplay } from '../EthereumAccountDetails/AccountDetailsDisplay';
+import AccountDetailsDisplay from '../EthereumAccountDetails/AccountDetailsDisplay';
 import { EthereumProvider } from '../../hooks/useEthereum';
 
 function App() {
