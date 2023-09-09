@@ -1,4 +1,4 @@
-name: Run hardhat linting
+name: Run backend linting
 
 on:
   workflow_dispatch:
@@ -26,15 +26,15 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: hardhat
+        working-directory: backend
 
       - name: Run ESLint on TypeScript files
         run: npx eslint "**/*.ts"
-        working-directory: hardhat
+        working-directory: backend
 
       - name: Run Prettier on TypeScript files
         run: npx prettier --check "**/*.ts"
-        working-directory: hardhat
+        working-directory: backend
 
   lint-solidity:
     name: Run solidity linter
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: hardhat
+        working-directory: backend
 
       - name: Run Solhint on Solidity files
         run: |
@@ -64,8 +64,8 @@ jobs:
           if [ -n "$trimmed_output" ]; then
             exit 1
           fi
-        working-directory: hardhat
+        working-directory: backend
 
       - name: Run Prettier on Solidity files
         run: npx prettier --check --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
-        working-directory: hardhat
+        working-directory: backend
