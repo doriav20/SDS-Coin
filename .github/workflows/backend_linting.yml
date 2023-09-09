@@ -1,4 +1,4 @@
-name: Run hardhat linting
+name: Run backend linting
 
 on:
   workflow_dispatch:
