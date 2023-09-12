@@ -4,6 +4,8 @@ pragma solidity ^0.8.19;
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
+error AlreadyMinted();
+
 contract SDSToken is ERC20, Ownable {
     constructor() ERC20("SDSToken", "SDS") {}
 
@@ -18,7 +20,11 @@ contract SDSToken is ERC20, Ownable {
 
     function mint100() public {
         address sender = _msgSender();
-        require(!alreadyMinted[sender], "mint100 already called once");
+
+        if (alreadyMinted[sender]) {
+            revert AlreadyMinted();
+        }
+
         alreadyMinted[sender] = true;
         mint(_msgSender(), 100);
     }
