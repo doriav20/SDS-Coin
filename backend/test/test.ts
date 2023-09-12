@@ -37,7 +37,7 @@ describe("SDSToken", function () {
         let signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100_000_000_000_000_000_000n);
 
-        await expect(instance.mint100()).to.be.revertedWith("mint100 already called once");
+        await expect(instance.mint100()).to.be.revertedWithCustomError(instance, "AlreadyMinted");
 
         signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100_000_000_000_000_000_000n);
