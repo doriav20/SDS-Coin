@@ -7,11 +7,20 @@ import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 contract SDSToken is ERC20, Ownable {
     constructor() ERC20("SDSToken", "SDS") {}
 
+    mapping(address => bool) private alreadyMinted;
+
     uint256 private currRand = 0xDEADBEEF_CAFEBABE_ABADF00D_0D15EA5E;
 
     function mint(address to, uint256 amount) public onlyOwner {
         uint256 _amount = amount * (10 ** decimals());
         _mint(to, _amount);
+    }
+
+    function mint100() public {
+        address sender = _msgSender();
+        require(!alreadyMinted[sender], "mint100 already called once");
+        alreadyMinted[sender] = true;
+        mint(_msgSender(), 100);
     }
 
     function mint500(address to) public onlyOwner {

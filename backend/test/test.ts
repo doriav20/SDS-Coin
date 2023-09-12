@@ -28,6 +28,21 @@ describe("SDSToken", function () {
         expect(signerBalance).to.equal(500_000_000_000_000_000_000n);
     });
 
+    it("Test mint100 can not be called twice", async function () {
+        const signer = (await ethers.getSigners())[0];
+
+        const signerAddress = await signer.getAddress();
+
+        await instance.mint100();
+        let signerBalance = await instance.balanceOf(signerAddress);
+        expect(signerBalance).to.equal(100_000_000_000_000_000_000n);
+
+        await expect(instance.mint100()).to.be.revertedWith("mint100 already called once");
+
+        signerBalance = await instance.balanceOf(signerAddress);
+        expect(signerBalance).to.equal(100_000_000_000_000_000_000n);
+    });
+
     it("Test getRandomNumber", async function () {
         const numbers = new Set();
         const amount_of_numbers_to_generate = 64;
