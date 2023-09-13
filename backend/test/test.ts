@@ -24,7 +24,8 @@ describe("SDSToken", function () {
         await instance.mint(signerAddress, mintAmount);
 
         const balance = await instance.myBalance();
+        const decimals = await instance.decimals();
 
-        expect(balance).to.equal(1_000_000_000_000_000_000_000n);
+        expect(balance).to.equal(mintAmount * 10n ** decimals);
     });
 });
