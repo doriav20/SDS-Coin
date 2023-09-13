@@ -37,4 +37,13 @@ describe("Mintable", function () {
         signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100_000_000_000_000_000_000n);
     });
+
+    it("Test owner-only restrictions for minting functions", async function () {
+        const nonOwner = (await ethers.getSigners())[1];
+        const nonOwnerAddress = await nonOwner.getAddress();
+
+        await expect(instance.connect(nonOwner).mint(nonOwnerAddress, 1000)).to.be.revertedWith(
+            "Ownable: caller is not the owner",
+        );
+    });
 });
