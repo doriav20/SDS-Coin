@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 import { CoinFlipJackpot } from "./CoinFlipJackpot.sol";
 
 contract CoinFlipJackpotPlayable {
-    CoinFlipJackpot private coinFlipJackpotContract;
+    CoinFlipJackpot internal coinFlipJackpotContract;
 
     constructor() {
         coinFlipJackpotContract = new CoinFlipJackpot(address(this));
