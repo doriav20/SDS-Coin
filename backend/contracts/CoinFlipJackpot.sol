@@ -2,7 +2,6 @@
 pragma solidity ^0.8.19;
 
 import { Context } from "@openzeppelin/contracts/utils/Context.sol";
-import { SDSToken } from "./SDSToken.sol";
 import { Randomizeble } from "./Randomizable.sol";
 
 contract CoinFlipJackpot is Context, Randomizeble {
@@ -12,7 +11,6 @@ contract CoinFlipJackpot is Context, Randomizeble {
         COOLDOWN
     }
 
-    SDSToken private sdsTokenContract;
     mapping(address => Player) private players;
 
     struct Player {
@@ -28,16 +26,12 @@ contract CoinFlipJackpot is Context, Randomizeble {
     event RoundResult(address indexed player, bool prediction, bool outcome, uint256 jackpot);
     event GameEnded(address indexed player, uint256 jackpot);
 
-    constructor(address _sdsTokenContractAddress) {
-        sdsTokenContract = SDSToken(_sdsTokenContractAddress);
-    }
-
-    function stakeSDS(uint8 _stakedAmount) external {
+    function stake(uint8 _stakedAmount) external {
         Player storage player = players[_msgSender()];
 
         require(!player.inGame, "Game already in progress!");
         require(block.timestamp - player.lastTimePlayed > 1 days, "You can only play once per day!");
-        require(sdsTokenContract.transferFrom(_msgSender(), address(this), _stakedAmount), "Transfer failed!");
+        transferFrom(_msgSender(), address(this), _stakedAmount);
 
         uint8 _rounds = _stakedAmount;
 
@@ -86,7 +80,7 @@ contract CoinFlipJackpot is Context, Randomizeble {
         require(player.roundsPlayed == player.totalRounds, "Not all rounds played");
 
         uint256 amount = player.jackpot;
-        require(sdsTokenContract.transfer(_msgSender(), amount), "Transfer failed!");
+        transfer(_msgSender(), amount);
 
         resetPlayerData();
     }
