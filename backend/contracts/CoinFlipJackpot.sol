@@ -4,6 +4,11 @@ pragma solidity ^0.8.19;
 import { Context } from "@openzeppelin/contracts/utils/Context.sol";
 import { Randomizeble } from "./Randomizable.sol";
 
+error GameAlreadyInProgress();
+error GameNotInProgress();
+error TriedToEndGameBeforeAllRoundsPlayed();
+error StakeAvailableOncePerDay();
+
 contract CoinFlipJackpot is Context, Randomizeble {
     enum GameStatus {
         READY,
@@ -29,8 +34,14 @@ contract CoinFlipJackpot is Context, Randomizeble {
     function stake(uint8 _stakedAmount) external {
         Player storage player = players[_msgSender()];
 
-        require(!player.inGame, "Game already in progress!");
-        require(block.timestamp - player.lastTimePlayed > 1 days, "You can only play once per day!");
+        if (player.inGame) {
+            revert GameAlreadyInProgress();
+        }
+
+        if (!(block.timestamp - player.lastTimePlayed > 1 days)) {
+            revert StakeAvailableOncePerDay();
+        }
+
         transferFrom(_msgSender(), address(this), _stakedAmount);
 
         uint8 _rounds = _stakedAmount;
@@ -47,8 +58,13 @@ contract CoinFlipJackpot is Context, Randomizeble {
     function playRound(bool _prediction) external {
         Player storage player = players[_msgSender()];
 
-        require(player.inGame, "Game not in progress!");
-        require(player.roundsPlayed < player.totalRounds, "All rounds played");
+        if (!player.inGame) {
+            revert GameNotInProgress();
+        }
+
+        if (player.roundsPlayed >= player.totalRounds) {
+            revert TriedToEndGameBeforeAllRoundsPlayed();
+        }
 
         generateRandomNumber();
         bool outcome = (getRandomNumber() % 2) == 0;
@@ -65,9 +81,9 @@ contract CoinFlipJackpot is Context, Randomizeble {
             player.multiplier = 1;
         }
 
-        player.roundsPlayed++;
-
         emit RoundResult(_msgSender(), _prediction, outcome, player.jackpot);
+
+        player.roundsPlayed++;
 
         if (player.roundsPlayed == player.totalRounds) {
             emit GameEnded(_msgSender(), player.jackpot);
@@ -77,7 +93,10 @@ contract CoinFlipJackpot is Context, Randomizeble {
 
     function gameFinishedHandler() private {
         Player storage player = players[_msgSender()];
-        require(player.roundsPlayed == player.totalRounds, "Not all rounds played");
+
+        if (player.roundsPlayed < player.totalRounds) {
+            revert TriedToEndGameBeforeAllRoundsPlayed();
+        }
 
         uint256 amount = player.jackpot;
         transfer(_msgSender(), amount);
