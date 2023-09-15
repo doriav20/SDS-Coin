@@ -12,7 +12,6 @@ abstract contract Mintable is ERC20, Ownable, OneTimeCallable {
     }
 
     function mint100() public canCallOnce {
-        address sender = _msgSender();
         mint(_msgSender(), 100);
     }
 
