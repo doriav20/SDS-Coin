@@ -3,8 +3,13 @@ export const CONTRACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 export const ABI = [
     {
         inputs: [],
-        stateMutability: 'nonpayable',
-        type: 'constructor',
+        name: 'FunctionCanOnlyBeCalledOnceByTheCaller',
+        type: 'error',
+    },
+    {
+        inputs: [],
+        name: 'OnlyOwnerCanCallThisFunction',
+        type: 'error',
     },
     {
         anonymous: false,
@@ -12,42 +17,30 @@ export const ABI = [
             {
                 indexed: true,
                 internalType: 'address',
-                name: 'owner',
-                type: 'address',
-            },
-            {
-                indexed: true,
-                internalType: 'address',
-                name: 'spender',
+                name: 'to',
                 type: 'address',
             },
             {
                 indexed: false,
                 internalType: 'uint256',
-                name: 'value',
+                name: 'amount',
                 type: 'uint256',
             },
         ],
-        name: 'Approval',
+        name: 'Mint',
         type: 'event',
     },
     {
         anonymous: false,
         inputs: [
             {
-                indexed: true,
-                internalType: 'address',
-                name: 'previousOwner',
-                type: 'address',
-            },
-            {
-                indexed: true,
-                internalType: 'address',
-                name: 'newOwner',
-                type: 'address',
+                indexed: false,
+                internalType: 'uint256',
+                name: 'randomNumber',
+                type: 'uint256',
             },
         ],
-        name: 'OwnershipTransferred',
+        name: 'RandomNumberGenerated',
         type: 'event',
     },
     {
@@ -79,16 +72,11 @@ export const ABI = [
         inputs: [
             {
                 internalType: 'address',
-                name: 'owner',
-                type: 'address',
-            },
-            {
-                internalType: 'address',
-                name: 'spender',
+                name: 'account',
                 type: 'address',
             },
         ],
-        name: 'allowance',
+        name: 'balanceOf',
         outputs: [
             {
                 internalType: 'uint256',
@@ -100,43 +88,13 @@ export const ABI = [
         type: 'function',
     },
     {
-        inputs: [
-            {
-                internalType: 'address',
-                name: 'spender',
-                type: 'address',
-            },
-            {
-                internalType: 'uint256',
-                name: 'amount',
-                type: 'uint256',
-            },
-        ],
-        name: 'approve',
+        inputs: [],
+        name: 'canMint100',
         outputs: [
             {
                 internalType: 'bool',
                 name: '',
                 type: 'bool',
-            },
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function',
-    },
-    {
-        inputs: [
-            {
-                internalType: 'address',
-                name: 'account',
-                type: 'address',
-            },
-        ],
-        name: 'balanceOf',
-        outputs: [
-            {
-                internalType: 'uint256',
-                name: '',
-                type: 'uint256',
             },
         ],
         stateMutability: 'view',
@@ -156,43 +114,34 @@ export const ABI = [
         type: 'function',
     },
     {
-        inputs: [
-            {
-                internalType: 'address',
-                name: 'spender',
-                type: 'address',
-            },
+        inputs: [],
+        name: 'generateRandomNumber',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'getRandomNumber',
+        outputs: [
             {
                 internalType: 'uint256',
-                name: 'subtractedValue',
+                name: '',
                 type: 'uint256',
             },
         ],
-        name: 'decreaseAllowance',
-        outputs: [
-            {
-                internalType: 'bool',
-                name: '',
-                type: 'bool',
-            },
-        ],
-        stateMutability: 'nonpayable',
+        stateMutability: 'view',
         type: 'function',
     },
     {
         inputs: [
             {
-                internalType: 'address',
-                name: 'spender',
-                type: 'address',
-            },
-            {
-                internalType: 'uint256',
-                name: 'addedValue',
-                type: 'uint256',
+                internalType: 'string',
+                name: 'functionSignature',
+                type: 'string',
             },
         ],
-        name: 'increaseAllowance',
+        name: 'hasFunctionBeenCalledOnce',
         outputs: [
             {
                 internalType: 'bool',
@@ -200,7 +149,7 @@ export const ABI = [
                 type: 'bool',
             },
         ],
-        stateMutability: 'nonpayable',
+        stateMutability: 'view',
         type: 'function',
     },
     {
@@ -222,14 +171,21 @@ export const ABI = [
         type: 'function',
     },
     {
+        inputs: [],
+        name: 'mint100',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
         inputs: [
             {
-                internalType: 'address',
-                name: 'to',
-                type: 'address',
+                internalType: 'uint256',
+                name: 'amount',
+                type: 'uint256',
             },
         ],
-        name: 'mint500',
+        name: 'mintSelf',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function',
@@ -271,13 +227,6 @@ export const ABI = [
             },
         ],
         stateMutability: 'view',
-        type: 'function',
-    },
-    {
-        inputs: [],
-        name: 'renounceOwnership',
-        outputs: [],
-        stateMutability: 'nonpayable',
         type: 'function',
     },
     {
@@ -327,48 +276,6 @@ export const ABI = [
                 type: 'bool',
             },
         ],
-        stateMutability: 'nonpayable',
-        type: 'function',
-    },
-    {
-        inputs: [
-            {
-                internalType: 'address',
-                name: 'from',
-                type: 'address',
-            },
-            {
-                internalType: 'address',
-                name: 'to',
-                type: 'address',
-            },
-            {
-                internalType: 'uint256',
-                name: 'amount',
-                type: 'uint256',
-            },
-        ],
-        name: 'transferFrom',
-        outputs: [
-            {
-                internalType: 'bool',
-                name: '',
-                type: 'bool',
-            },
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function',
-    },
-    {
-        inputs: [
-            {
-                internalType: 'address',
-                name: 'newOwner',
-                type: 'address',
-            },
-        ],
-        name: 'transferOwnership',
-        outputs: [],
         stateMutability: 'nonpayable',
         type: 'function',
     },
