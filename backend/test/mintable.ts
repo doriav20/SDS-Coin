@@ -26,6 +26,9 @@ describe("Mintable", function () {
             "FunctionCanOnlyBeCalledOnceByTheCaller",
         );
 
+        const canMint100 = await instance.canMint100();
+        expect(canMint100).to.equal(false);
+
         signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100n * 10n ** decimals);
     });

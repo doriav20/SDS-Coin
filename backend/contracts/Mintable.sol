@@ -9,4 +9,8 @@ abstract contract Mintable is SDSTokenStandard, OneTimeCallable {
         uint256 _amount = 100 * (10 ** decimals());
         _mintSelf(_amount);
     }
+
+    function canMint100() public view returns (bool) {
+        return !hasFunctionBeenCalledOnce("mint100()");
+    }
 }
