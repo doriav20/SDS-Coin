@@ -10,8 +10,8 @@ abstract contract Randomizeble {
     using EllipticCurve for uint256;
 
     uint256 private rnd = 0;
-    uint256 private currentX = EllipticCurveConstants.Gx;
-    uint256 private currentY = EllipticCurveConstants.Gy;
+    uint256 private currentX = EllipticCurveConstants.G_X;
+    uint256 private currentY = EllipticCurveConstants.G_Y;
 
     function generateRandomNumber() public {
         (currentX, currentY) = currentX.getNewPoint(currentY);
