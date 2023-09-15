@@ -7,6 +7,23 @@ library EllipticCurve {
     // Curve equation: y^2 = x^3 + Ax + B mod P
     // P is the prime specifying the field over which the curve operates
 
+    function inverseMod(uint256 a, uint256 m) internal pure returns (uint256) {
+        int256 t1 = 0;
+        int256 t2 = 1;
+        int256 r1 = int256(m);
+        int256 r2 = int256(a);
+        int256 q;
+        unchecked {
+            while (r2 != 0) {
+                q = int256(uint256(r1) / uint256(r2));
+                (t1, t2) = (t2, t1 - q * t2);
+                (r1, r2) = (r2, r1 - q * r2);
+            }
+        }
+        if (t1 < 0) t1 += int256(m);
+        return uint256(t1);
+    }
+
     function isOnCurve(uint256 x, uint256 y) internal pure returns (bool) {
         uint256 lhs = mulmod(y, y, EllipticCurveConstants.P);
         uint256 rhs = addmod(
@@ -21,8 +38,36 @@ library EllipticCurve {
         return lhs == rhs;
     }
 
+    function submod(uint256 x, uint256 y, uint256 mod) private pure returns (uint256) {
+        uint256 result;
+        unchecked {
+            result = addmod(x, mod - y, mod);
+        }
+        return result;
+    }
+
     function doublePoint(uint256 x, uint256 y) internal pure returns (uint256, uint256) {
-        return (EllipticCurveConstants.Gx, EllipticCurveConstants.Gy);
+        uint256 lam;
+        uint256 x2;
+        uint256 y2;
+        unchecked {
+            lam = mulmod(
+                addmod(
+                    mulmod(3, mulmod(x, x, EllipticCurveConstants.P), EllipticCurveConstants.P),
+                    EllipticCurveConstants.A,
+                    EllipticCurveConstants.P
+                ),
+                inverseMod(2 * y, EllipticCurveConstants.P),
+                EllipticCurveConstants.P
+            );
+            x2 = submod(mulmod(lam, lam, EllipticCurveConstants.P), 2 * x, EllipticCurveConstants.P);
+            y2 = submod(
+                mulmod(lam, submod(x, x2, EllipticCurveConstants.P), EllipticCurveConstants.P),
+                y,
+                EllipticCurveConstants.P
+            );
+        }
+        return (x2, y2);
     }
 
     function fixPoint(uint256 x, uint256 y) internal pure returns (uint256, uint256) {
