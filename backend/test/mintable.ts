@@ -34,7 +34,10 @@ describe("Mintable", function () {
         let signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100n * 10n ** decimals);
 
-        await expect(instance.mint100()).to.be.revertedWithCustomError(instance, "AlreadyMinted");
+        await expect(instance.mint100()).to.be.revertedWithCustomError(
+            instance,
+            "FunctionCanOnlyBeCalledOnceByTheCaller",
+        );
 
         signerBalance = await instance.balanceOf(signerAddress);
         expect(signerBalance).to.equal(100n * 10n ** decimals);
