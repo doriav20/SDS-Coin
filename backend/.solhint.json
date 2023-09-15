@@ -11,6 +11,13 @@
       {
         "ignoreConstructors": true
       }
-    ]
+    ],
+    "reason-string": [
+      "warn",
+      {
+        "maxLength": 64
+      }
+    ],
+    "custom-errors": "off"
   }
 }
