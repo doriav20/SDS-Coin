@@ -21,6 +21,6 @@ describe("Randomizable", function () {
             numbers.add(randomNumber);
         }
 
-        expect(numbers.size).to.equal(64); // We expect 64 unique numbers
+        expect(numbers.size).to.equal(amount_of_numbers_to_generate); // We expect 64 unique numbers
     });
 });
