@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "./TicTacToeGame.sol";
+import { TicTacToeGame } from "./TicTacToeGame.sol";
 
 abstract contract TicTacToePlayable {
     TicTacToeGame public ticTacToeContract;
