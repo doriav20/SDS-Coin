@@ -14,16 +14,16 @@ function TicTacToeBoardDisplay() {
         </div>
     );
 
+    const joinGameButton = (
+        <button className="join-game-button" onClick={handleJoinGame}>
+            Join Game (20 SDS)
+        </button>
+    );
+
     let componentToRender = null;
     switch (gameStatus) {
         case GameStatus.READY_TO_START:
-            componentToRender = (
-                <div className="message-container">
-                    <button className="join-game-button" onClick={handleJoinGame}>
-                        Join Game
-                    </button>
-                </div>
-            );
+            componentToRender = <div className="message-container">{joinGameButton}</div>;
             break;
         case GameStatus.WAITING_FOR_OPPONENT_TO_JOIN:
             componentToRender = (
@@ -53,9 +53,7 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">You won!</p>
                     {boardComponent}
-                    <button className="join-game-button" onClick={handleJoinGame}>
-                        Join Game
-                    </button>
+                    {joinGameButton}
                 </div>
             );
             break;
@@ -64,9 +62,7 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">You lost!</p>
                     {boardComponent}
-                    <button className="join-game-button" onClick={handleJoinGame}>
-                        Join Game
-                    </button>
+                    {joinGameButton}
                 </div>
             );
             break;
@@ -75,9 +71,7 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">Draw!</p>
                     {boardComponent}
-                    <button className="join-game-button" onClick={handleJoinGame}>
-                        Join Game
-                    </button>
+                    {joinGameButton}
                 </div>
             );
             break;
