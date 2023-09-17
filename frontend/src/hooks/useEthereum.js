@@ -11,7 +11,7 @@ export function EthereumProvider({ children }) {
 
     useEffect(() => {
         if (window.ethereum) {
-            const newProvider = new ethers.BrowserProvider(window.ethereum);
+            const newProvider = new ethers.JsonRpcProvider();
             setProvider(newProvider);
 
             newProvider
