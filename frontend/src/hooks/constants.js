@@ -140,6 +140,19 @@ export const ABI = [
     },
     {
         inputs: [],
+        name: 'getBoardForPlayer',
+        outputs: [
+            {
+                internalType: 'uint24',
+                name: '',
+                type: 'uint24',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [],
         name: 'getRandomNumber',
         outputs: [
             {

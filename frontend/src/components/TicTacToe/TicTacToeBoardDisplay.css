@@ -1,0 +1,74 @@
+.tic-tac-toe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    box-shadow: 3px 3px 15px rgba(255, 255, 255, 0.1);
+    background: #333;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.tic-tac-toe-button {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 1px solid #555;
+    background: linear-gradient(to top, #444, #555);
+    color: #f1f1f1;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.tic-tac-toe-button:hover {
+    background: linear-gradient(to top, #555, #666);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.tic-tac-toe-button:active {
+    background: linear-gradient(to top, #333, #444);
+    box-shadow: none;
+}
+
+/* General styling */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(255, 255, 255, 0.1);
+}
+
+.message-text {
+    color: #f1f1f1;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+.join-game-button {
+    padding: 10px 20px;
+    background: linear-gradient(to top, #444, #555);
+    border: none;
+    border-radius: 5px;
+    color: #f1f1f1;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.join-game-button:hover {
+    background: linear-gradient(to top, #555, #666);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.join-game-button:active {
+    background: linear-gradient(to top, #333, #444);
+    box-shadow: none;
+}

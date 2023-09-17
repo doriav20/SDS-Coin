@@ -25,15 +25,18 @@ contract TicTacToeGame {
     address private pendingPlayer;
 
     event GameCreated(uint256 gameId, address player1, address player2, uint256 betAmount);
-    event GameFinished(uint256 gameId, address winner, address loser, uint256 betAmount);
-    event PlayerMoved(uint256 gameId, address player, uint8 cell);
+    event BoardChanged(uint256 indexed gameId, uint24 board);
 
     constructor(address _tokenAddress) {
         token = SDSToken(_tokenAddress);
     }
 
     function enterGame(address playerAddress) external {
-        require(playerGameIds[playerAddress] == 0, "You are already in a game");
+        require(
+            playerGameIds[playerAddress] == 0 ||
+                (!games[playerGameIds[playerAddress]].isActive && playerAddress != pendingPlayer),
+            "You are already in a game"
+        );
         require(token.balanceOf(playerAddress) >= ENTRY_FEE, "Insufficient token balance");
         require(token.transferFrom(playerAddress, address(this), ENTRY_FEE), "Token transfer failed");
 
@@ -69,7 +72,7 @@ contract TicTacToeGame {
         require(TicTacToeBoard.getPlayer(game.board) == (game.player1 == playerAddress ? 0 : 1), "Not your turn");
 
         game.board = TicTacToeBoard.move(game.board, cell);
-        emit PlayerMoved(gameId, playerAddress, cell);
+        emit BoardChanged(gameId, game.board);
 
         uint8 gameState = TicTacToeBoard.getState(game.board);
         if (gameState != 0) {
@@ -80,22 +83,17 @@ contract TicTacToeGame {
     function finishGame(uint256 gameId, uint8 gameState) internal {
         Game storage game = games[gameId];
         game.isActive = false;
-        playerGameIds[game.player1] = 0;
-        playerGameIds[game.player2] = 0;
 
         if (gameState == 1) {
             // Player 1 wins
             token.transfer(game.player1, game.betAmount);
-            emit GameFinished(gameId, game.player1, game.player2, game.betAmount);
         } else if (gameState == 2) {
             // Player 2 wins
             token.transfer(game.player2, game.betAmount);
-            emit GameFinished(gameId, game.player2, game.player1, game.betAmount);
         } else {
             // It's a draw
             token.transfer(game.player1, game.betAmount / 2);
             token.transfer(game.player2, game.betAmount / 2);
-            emit GameFinished(gameId, address(0), address(0), game.betAmount);
         }
     }
 
@@ -105,5 +103,31 @@ contract TicTacToeGame {
 
     function getGameId(address player) external view returns (uint256) {
         return playerGameIds[player];
+    }
+
+    function getBoard(address player) external view returns (uint24) {
+        uint256 gameId = playerGameIds[player];
+
+        if (gameId == 0) {
+            return 0xFFFFFF; // return all 1s if player is not in a game
+        }
+
+        if (player == pendingPlayer) {
+            // Use 22th bit to indicate that the player is pending
+            return 1 << 21;
+        }
+
+        uint24 board = games[gameId].board;
+
+        // Use 23th bit to indicate that the player is player1 or player2
+        // 0 for player1, 1 for player2
+        if (player == games[gameId].player1) {
+            return board; // board | (0 << 22)
+        }
+        if (player == games[gameId].player2) {
+            return board | (1 << 22);
+        }
+
+        return 0xFFFFFF;
     }
 }

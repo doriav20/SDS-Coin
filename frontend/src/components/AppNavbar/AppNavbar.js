@@ -30,8 +30,7 @@ function MainNavbar({ children }) {
                         <Nav className="me-auto">
                             <ActiveNavLink href="/details">Wallet Details</ActiveNavLink>
 
-                            {/*TODO: Replace this after Game 1 is added*/}
-                            <ActiveNavLink href="/game1">Game 1</ActiveNavLink>
+                            <ActiveNavLink href="/tictactoe">Tic Tac Toe</ActiveNavLink>
 
                             {/*TODO: Replace this after Game 2 is added*/}
                             <ActiveNavLink href="/game2">Game 2</ActiveNavLink>
