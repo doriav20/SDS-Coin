@@ -140,6 +140,19 @@ export const ABI = [
     },
     {
         inputs: [],
+        name: 'getBoardForPlayer',
+        outputs: [
+            {
+                internalType: 'uint24',
+                name: '',
+                type: 'uint24',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [],
         name: 'getRandomNumber',
         outputs: [
             {
@@ -160,6 +173,19 @@ export const ABI = [
             },
         ],
         name: 'hasFunctionBeenCalledOnce',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'isPlayerPending',
         outputs: [
             {
                 internalType: 'bool',
@@ -377,6 +403,25 @@ export const TIC_TAC_TOE_ABI = [
         anonymous: false,
         inputs: [
             {
+                indexed: true,
+                internalType: 'uint256',
+                name: 'gameId',
+                type: 'uint256',
+            },
+            {
+                indexed: false,
+                internalType: 'uint24',
+                name: 'board',
+                type: 'uint24',
+            },
+        ],
+        name: 'BoardChanged',
+        type: 'event',
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
                 indexed: false,
                 internalType: 'uint256',
                 name: 'gameId',
@@ -405,62 +450,6 @@ export const TIC_TAC_TOE_ABI = [
         type: 'event',
     },
     {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: 'uint256',
-                name: 'gameId',
-                type: 'uint256',
-            },
-            {
-                indexed: false,
-                internalType: 'address',
-                name: 'winner',
-                type: 'address',
-            },
-            {
-                indexed: false,
-                internalType: 'address',
-                name: 'loser',
-                type: 'address',
-            },
-            {
-                indexed: false,
-                internalType: 'uint256',
-                name: 'betAmount',
-                type: 'uint256',
-            },
-        ],
-        name: 'GameFinished',
-        type: 'event',
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: 'uint256',
-                name: 'gameId',
-                type: 'uint256',
-            },
-            {
-                indexed: false,
-                internalType: 'address',
-                name: 'player',
-                type: 'address',
-            },
-            {
-                indexed: false,
-                internalType: 'uint8',
-                name: 'cell',
-                type: 'uint8',
-            },
-        ],
-        name: 'PlayerMoved',
-        type: 'event',
-    },
-    {
         inputs: [
             {
                 internalType: 'address',
@@ -471,6 +460,25 @@ export const TIC_TAC_TOE_ABI = [
         name: 'enterGame',
         outputs: [],
         stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'player',
+                type: 'address',
+            },
+        ],
+        name: 'getBoardForPlayer',
+        outputs: [
+            {
+                internalType: 'uint24',
+                name: '',
+                type: 'uint24',
+            },
+        ],
+        stateMutability: 'view',
         type: 'function',
     },
     {
@@ -533,6 +541,25 @@ export const TIC_TAC_TOE_ABI = [
                 internalType: 'uint256',
                 name: '',
                 type: 'uint256',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'player',
+                type: 'address',
+            },
+        ],
+        name: 'isPlayerPending',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
             },
         ],
         stateMutability: 'view',
