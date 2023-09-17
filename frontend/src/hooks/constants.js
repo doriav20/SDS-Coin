@@ -3,6 +3,11 @@ export const CONTRACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 export const ABI = [
     {
         inputs: [],
+        stateMutability: 'nonpayable',
+        type: 'constructor',
+    },
+    {
+        inputs: [],
         name: 'FunctionCanOnlyBeCalledOnceByTheCaller',
         type: 'error',
     },
@@ -72,6 +77,19 @@ export const ABI = [
         inputs: [
             {
                 internalType: 'address',
+                name: 'owner',
+                type: 'address',
+            },
+        ],
+        name: 'addOwner',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
                 name: 'account',
                 type: 'address',
             },
@@ -110,7 +128,7 @@ export const ABI = [
                 type: 'uint8',
             },
         ],
-        stateMutability: 'view',
+        stateMutability: 'pure',
         type: 'function',
     },
     {
@@ -150,6 +168,19 @@ export const ABI = [
             },
         ],
         stateMutability: 'view',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'uint8',
+                name: 'cell',
+                type: 'uint8',
+            },
+        ],
+        name: 'makeMove',
+        outputs: [],
+        stateMutability: 'nonpayable',
         type: 'function',
     },
     {
@@ -213,20 +244,27 @@ export const ABI = [
                 type: 'string',
             },
         ],
+        stateMutability: 'pure',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'owners',
+        outputs: [
+            {
+                internalType: 'address[]',
+                name: '',
+                type: 'address[]',
+            },
+        ],
         stateMutability: 'view',
         type: 'function',
     },
     {
         inputs: [],
-        name: 'owner',
-        outputs: [
-            {
-                internalType: 'address',
-                name: '',
-                type: 'address',
-            },
-        ],
-        stateMutability: 'view',
+        name: 'playTicTacToe',
+        outputs: [],
+        stateMutability: 'nonpayable',
         type: 'function',
     },
     {
@@ -237,6 +275,19 @@ export const ABI = [
                 internalType: 'string',
                 name: '',
                 type: 'string',
+            },
+        ],
+        stateMutability: 'pure',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'ticTacToeContract',
+        outputs: [
+            {
+                internalType: 'contract TicTacToeGame',
+                name: '',
+                type: 'address',
             },
         ],
         stateMutability: 'view',
@@ -269,6 +320,35 @@ export const ABI = [
             },
         ],
         name: 'transfer',
+        outputs: [
+            {
+                internalType: 'bool',
+                name: '',
+                type: 'bool',
+            },
+        ],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [
+            {
+                internalType: 'address',
+                name: 'from',
+                type: 'address',
+            },
+            {
+                internalType: 'address',
+                name: 'to',
+                type: 'address',
+            },
+            {
+                internalType: 'uint256',
+                name: 'amount',
+                type: 'uint256',
+            },
+        ],
+        name: 'transferFrom',
         outputs: [
             {
                 internalType: 'bool',
