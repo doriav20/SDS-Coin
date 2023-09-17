@@ -1,4 +1,3 @@
-import '../../components/App/App.css';
 import useTicTacToe, { GameStatus } from '../../hooks/useTicTacToe';
 
 function TicTacToeBoardDisplay() {

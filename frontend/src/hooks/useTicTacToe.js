@@ -1,5 +1,3 @@
-import '../../components/App/App.css';
-
 export const GameStatus = Object.freeze({
     READY_TO_START: 0,
     WAITING_FOR_OPPONENT_TO_JOIN: 1,
