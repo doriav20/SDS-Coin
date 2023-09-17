@@ -104,4 +104,30 @@ contract TicTacToeGame {
     function getGameId(address player) external view returns (uint256) {
         return playerGameIds[player];
     }
+
+    function getBoard(address player) external view returns (uint24) {
+        uint256 gameId = playerGameIds[player];
+
+        if (gameId == 0) {
+            return 0xFFFFFF; // return all 1s if player is not in a game
+        }
+
+        if (player == pendingPlayer) {
+            // Use 22th bit to indicate that the player is pending
+            return 1 << 21;
+        }
+
+        uint24 board = games[gameId].board;
+
+        // Use 23th bit to indicate that the player is player1 or player2
+        // 0 for player1, 1 for player2
+        if (player == games[gameId].player1) {
+            return board; // board | (0 << 22)
+        }
+        if (player == games[gameId].player2) {
+            return board | (1 << 22);
+        }
+
+        return 0xFFFFFF;
+    }
 }

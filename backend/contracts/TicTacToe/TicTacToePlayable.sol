@@ -17,4 +17,8 @@ abstract contract TicTacToePlayable {
     function makeMove(uint8 cell) external {
         ticTacToeContract.makeMove(msg.sender, cell);
     }
+
+    function getBoardForPlayer() external view returns (uint24) {
+        return ticTacToeContract.getBoard(msg.sender);
+    }
 }
