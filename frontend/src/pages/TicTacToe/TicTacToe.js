@@ -4,7 +4,9 @@ import TicTacToeBoardDisplay from '../../components/TicTacToe/TicTacToeBoardDisp
 function TicTacToe() {
     return (
         <div className="App">
-            <div className="App-header">{TicTacToeBoardDisplay}</div>
+            <div className="App-header">
+                <TicTacToeBoardDisplay />
+            </div>
         </div>
     );
 }

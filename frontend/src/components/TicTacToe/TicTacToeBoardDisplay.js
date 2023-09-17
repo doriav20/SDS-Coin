@@ -1,16 +1,13 @@
+import './TicTacToeBoardDisplay.css';
 import useTicTacToe, { GameStatus } from '../../hooks/useTicTacToe';
 
 function TicTacToeBoardDisplay() {
     const { board, handleClick, gameStatus, handleJoinGame } = useTicTacToe();
 
     const boardComponent = (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 60px)', gap: '5px' }}>
+        <div className="tic-tac-toe-board">
             {board.map((cell, index) => (
-                <button
-                    key={index}
-                    style={{ width: '60px', height: '60px', fontSize: '20px' }}
-                    onClick={() => handleClick(index)}
-                >
+                <button key={index} className="tic-tac-toe-button" onClick={() => handleClick(index)}>
                     {cell}
                 </button>
             ))}
@@ -20,53 +17,67 @@ function TicTacToeBoardDisplay() {
     let componentToRender = null;
     switch (gameStatus) {
         case GameStatus.READY_TO_START:
-            componentToRender = <button onClick={handleJoinGame}>Join Game</button>;
+            componentToRender = (
+                <div className="message-container">
+                    <button className="join-game-button" onClick={handleJoinGame}>
+                        Join Game
+                    </button>
+                </div>
+            );
             break;
         case GameStatus.WAITING_FOR_OPPONENT_TO_JOIN:
-            componentToRender = <p>Waiting for opponent to join...</p>;
+            componentToRender = (
+                <div className="message-container">
+                    <p className="message-text">Waiting for opponent to join...</p>
+                </div>
+            );
             break;
         case GameStatus.YOUR_TURN:
             componentToRender = (
-                <div>
-                    <p>Your turn</p>
+                <div className="message-container">
+                    <p className="message-text">Your turn</p>
                     {boardComponent}
                 </div>
             );
             break;
         case GameStatus.OPPONENTS_TURN:
             componentToRender = (
-                <div>
-                    <p>Opponent&apos;s turn</p>
+                <div className="message-container">
+                    <p className="message-text">Opponent&apos;s turn</p>
                     {boardComponent}
                 </div>
             );
             break;
         case GameStatus.YOU_WON:
             componentToRender = (
-                <div>
-                    <p>You won!</p>
+                <div className="message-container">
+                    <p className="message-text">You won!</p>
                     {boardComponent}
                 </div>
             );
             break;
         case GameStatus.YOU_LOST:
             componentToRender = (
-                <div>
-                    <p>You lost!</p>
+                <div className="message-container">
+                    <p className="message-text">You lost!</p>
                     {boardComponent}
                 </div>
             );
             break;
         case GameStatus.DRAW:
             componentToRender = (
-                <div>
-                    <p>Draw!</p>
+                <div className="message-container">
+                    <p className="message-text">Draw!</p>
                     {boardComponent}
                 </div>
             );
             break;
         default:
-            componentToRender = <p>Something went wrong. Please refresh the page.</p>;
+            componentToRender = (
+                <div className="message-container">
+                    <p className="message-text">Something went wrong. Please refresh the page.</p>
+                </div>
+            );
     }
 
     return componentToRender;
