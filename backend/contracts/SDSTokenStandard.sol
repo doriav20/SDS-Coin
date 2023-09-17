@@ -16,15 +16,15 @@ contract SDSTokenStandard {
         _owners.push(msg.sender);
     }
 
-    function name() public view returns (string memory) {
+    function name() public pure returns (string memory) {
         return "SDSToken";
     }
 
-    function symbol() public view returns (string memory) {
+    function symbol() public pure returns (string memory) {
         return "SDS";
     }
 
-    function decimals() public view returns (uint8) {
+    function decimals() public pure returns (uint8) {
         return 18;
     }
 
