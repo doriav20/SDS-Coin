@@ -7,13 +7,13 @@ contract SDSTokenStandard {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Mint(address indexed to, uint256 amount);
 
-    address private _owner;
+    address[] private _owners;
 
     mapping(address => uint256) private _balances;
     uint256 private _totalSupply;
 
     constructor() {
-        _owner = msg.sender;
+        _owners.push(msg.sender);
     }
 
     function name() public view returns (string memory) {
@@ -28,15 +28,29 @@ contract SDSTokenStandard {
         return 18;
     }
 
-    function owner() public view virtual returns (address) {
-        return _owner;
+    function owners() public view virtual returns (address[] memory) {
+        return _owners;
     }
 
     modifier onlyOwner() {
-        if (msg.sender != _owner) {
+        bool isOwner = false;
+        for (uint256 i = 0; i < _owners.length; ) {
+            if (_owners[i] == msg.sender) {
+                isOwner = true;
+                break;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        if (!isOwner) {
             revert OnlyOwnerCanCallThisFunction();
         }
         _;
+    }
+
+    function addOwner(address owner) public onlyOwner {
+        _owners.push(owner);
     }
 
     function totalSupply() public view returns (uint256) {
@@ -54,6 +68,11 @@ contract SDSTokenStandard {
     function transfer(address to, uint256 amount) public returns (bool) {
         address sender = msg.sender;
         _transfer(sender, to, amount);
+        return true;
+    }
+
+    function transferFrom(address from, address to, uint256 amount) public onlyOwner returns (bool) {
+        _transfer(from, to, amount);
         return true;
     }
 
