@@ -119,14 +119,6 @@ function useTicTacToe() {
             });
         }, 3000);
 
-        if (gameStatus === GameStatus.YOU_WON) {
-            alert('You won! Congratulations!');
-        } else if (gameStatus === GameStatus.YOU_LOST) {
-            alert('You lost! Good luck next time!');
-        } else if (gameStatus === GameStatus.DRAW) {
-            alert('It is a draw! Well played!');
-        }
-
         return () => {
             clearInterval(intervalId);
         };

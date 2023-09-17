@@ -51,7 +51,7 @@ function TicTacToeBoardDisplay() {
         case GameStatus.YOU_WON:
             componentToRender = (
                 <div className="message-container">
-                    <p className="message-text">You won!</p>
+                    <p className="message-text">You won! Congratulations!</p>
                     {boardComponent}
                     {joinGameButton}
                 </div>
@@ -60,7 +60,7 @@ function TicTacToeBoardDisplay() {
         case GameStatus.YOU_LOST:
             componentToRender = (
                 <div className="message-container">
-                    <p className="message-text">You lost!</p>
+                    <p className="message-text">You lost! Good luck next time!</p>
                     {boardComponent}
                     {joinGameButton}
                 </div>
@@ -69,7 +69,7 @@ function TicTacToeBoardDisplay() {
         case GameStatus.DRAW:
             componentToRender = (
                 <div className="message-container">
-                    <p className="message-text">Draw!</p>
+                    <p className="message-text">It is a draw! Well played!</p>
                     {boardComponent}
                     {joinGameButton}
                 </div>
