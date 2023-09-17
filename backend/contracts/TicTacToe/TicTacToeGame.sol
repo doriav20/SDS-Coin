@@ -58,8 +58,12 @@ contract TicTacToeGame {
         }
     }
 
-    function makeMove(address playerAddress, uint256 gameId, uint8 cell) external {
+    function makeMove(address playerAddress, uint8 cell) external {
+        uint256 gameId = playerGameIds[playerAddress];
+        require(gameId != 0, "Game not found");
+
         Game storage game = games[gameId];
+
         require(game.isActive, "Game is not active");
         require(game.player1 == playerAddress || game.player2 == playerAddress, "Unauthorized player");
         require(TicTacToeBoard.getPlayer(game.board) == (game.player1 == playerAddress ? 0 : 1), "Not your turn");
