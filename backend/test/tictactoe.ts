@@ -149,7 +149,7 @@ describe("SDSToken", function () {
         const player3 = (await ethers.getSigners())[2];
         await instance.connect(player3).playTicTacToe();
 
-        await expect(instance.connect(player3).makeMove(gameIdP1, 1)).to.be.revertedWith("Not your game");
+        await expect(instance.connect(player3).makeMove(gameIdP1, 1)).to.be.revertedWith("Unauthorized player");
     });
 
     it("Player should not be able to start a new game if they already have an active game", async function () {
