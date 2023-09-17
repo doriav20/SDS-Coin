@@ -18,7 +18,7 @@ contract SDSToken is SDSTokenStandard, Mintable, Randomizeble {
         ticTacToeContract.enterGame(msg.sender);
     }
 
-    function makeMove(uint256 gameId, uint8 cell) external {
-        ticTacToeContract.makeMove(msg.sender, gameId, cell);
+    function makeMove(uint8 cell) external {
+        ticTacToeContract.makeMove(msg.sender, cell);
     }
 }

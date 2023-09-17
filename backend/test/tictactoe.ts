@@ -56,7 +56,7 @@ describe("SDSToken", function () {
 
         const gameId = await ticTacToeInstance.getGameId(player1Address);
 
-        await instance.connect(player1).makeMove(gameId, 1);
+        await instance.connect(player1).makeMove(1);
 
         const game = await ticTacToeInstance.getGame(gameId);
         expect(game.board).to.equal(0b000_00_1_00_00_00_00_00_00_00_01_00n);
@@ -75,11 +75,11 @@ describe("SDSToken", function () {
         const gameId = await ticTacToeInstance.getGameId(player1Address);
 
         // Simulating a winning sequence for player1 (assuming this results in a win)
-        await instance.connect(player1).makeMove(gameId, 0);
-        await instance.connect(player2).makeMove(gameId, 3);
-        await instance.connect(player1).makeMove(gameId, 1);
-        await instance.connect(player2).makeMove(gameId, 4);
-        await instance.connect(player1).makeMove(gameId, 2);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(3);
+        await instance.connect(player1).makeMove(1);
+        await instance.connect(player2).makeMove(4);
+        await instance.connect(player1).makeMove(2);
 
         const game = await ticTacToeInstance.getGame(gameId);
         expect(game.board).to.equal(0b000_01_1_00_00_00_00_10_10_01_01_01n);
@@ -104,15 +104,15 @@ describe("SDSToken", function () {
         const gameId = await ticTacToeInstance.getGameId(player1Address);
 
         // Simulating a sequence that results in a draw (assuming this results in a draw)
-        await instance.connect(player1).makeMove(gameId, 0);
-        await instance.connect(player2).makeMove(gameId, 2);
-        await instance.connect(player1).makeMove(gameId, 1);
-        await instance.connect(player2).makeMove(gameId, 3);
-        await instance.connect(player1).makeMove(gameId, 5);
-        await instance.connect(player2).makeMove(gameId, 4);
-        await instance.connect(player1).makeMove(gameId, 6);
-        await instance.connect(player2).makeMove(gameId, 7);
-        await instance.connect(player1).makeMove(gameId, 8);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(2);
+        await instance.connect(player1).makeMove(1);
+        await instance.connect(player2).makeMove(3);
+        await instance.connect(player1).makeMove(5);
+        await instance.connect(player2).makeMove(4);
+        await instance.connect(player1).makeMove(6);
+        await instance.connect(player2).makeMove(7);
+        await instance.connect(player1).makeMove(8);
 
         const game = await ticTacToeInstance.getGame(gameId);
         expect(game.board).to.equal(0b000_11_1_01_10_01_01_10_10_10_01_01);
@@ -129,27 +129,23 @@ describe("SDSToken", function () {
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
 
-        const gameId = await ticTacToeInstance.getGameId(player1Address);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(4);
+        await instance.connect(player1).makeMove(1);
+        await instance.connect(player2).makeMove(5);
+        await instance.connect(player1).makeMove(2);
 
-        await instance.connect(player1).makeMove(gameId, 0);
-        await instance.connect(player2).makeMove(gameId, 4);
-        await instance.connect(player1).makeMove(gameId, 1);
-        await instance.connect(player2).makeMove(gameId, 5);
-        await instance.connect(player1).makeMove(gameId, 2);
-
-        await expect(instance.connect(player2).makeMove(gameId, 8)).to.be.revertedWith("Game is not active");
+        await expect(instance.connect(player2).makeMove(8)).to.be.revertedWith("Game not found");
     });
 
     it("Player should not be able to make a move in a game that is not theirs", async function () {
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
 
-        const gameIdP1 = await ticTacToeInstance.getGameId(player1Address);
-
         const player3 = (await ethers.getSigners())[2];
         await instance.connect(player3).playTicTacToe();
 
-        await expect(instance.connect(player3).makeMove(gameIdP1, 1)).to.be.revertedWith("Unauthorized player");
+        await expect(instance.connect(player3).makeMove(1)).to.be.revertedWith("Game is not active");
     });
 
     it("Player should not be able to start a new game if they already have an active game", async function () {
@@ -172,11 +168,11 @@ describe("SDSToken", function () {
         const gameId1 = await ticTacToeInstance.getGameId(player1Address);
         expect(gameId1).to.equal(1);
 
-        await instance.connect(player1).makeMove(gameId1, 0);
-        await instance.connect(player2).makeMove(gameId1, 4);
-        await instance.connect(player1).makeMove(gameId1, 1);
-        await instance.connect(player2).makeMove(gameId1, 5);
-        await instance.connect(player1).makeMove(gameId1, 2);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(4);
+        await instance.connect(player1).makeMove(1);
+        await instance.connect(player2).makeMove(5);
+        await instance.connect(player1).makeMove(2);
 
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
@@ -184,11 +180,11 @@ describe("SDSToken", function () {
         const gameId2 = await ticTacToeInstance.getGameId(player1Address);
         expect(gameId2).to.equal(2);
 
-        await instance.connect(player1).makeMove(gameId2, 0);
-        await instance.connect(player2).makeMove(gameId2, 4);
-        await instance.connect(player1).makeMove(gameId2, 1);
-        await instance.connect(player2).makeMove(gameId2, 5);
-        await instance.connect(player1).makeMove(gameId2, 2);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(4);
+        await instance.connect(player1).makeMove(1);
+        await instance.connect(player2).makeMove(5);
+        await instance.connect(player1).makeMove(2);
 
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
@@ -209,29 +205,27 @@ describe("SDSToken", function () {
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
 
-        const gameId = await ticTacToeInstance.getGameId(player1Address);
+        await instance.connect(player1).makeMove(0);
+        await instance.connect(player2).makeMove(4);
 
-        await instance.connect(player1).makeMove(gameId, 0);
-        await instance.connect(player2).makeMove(gameId, 4);
-
-        await expect(instance.connect(player1).makeMove(gameId, 4)).to.be.revertedWith("Cell is not empty");
+        await expect(instance.connect(player1).makeMove(4)).to.be.revertedWith("Cell is not empty");
     });
 
     it("Player should not be able to make a move if it is not their turn", async function () {
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
 
-        const gameId = await ticTacToeInstance.getGameId(player1Address);
-
-        await expect(instance.connect(player2).makeMove(gameId, 0)).to.be.revertedWith("Not your turn");
+        await expect(instance.connect(player2).makeMove(0)).to.be.revertedWith("Not your turn");
     });
 
     it("Player should not be able to make a move to an invalid square", async function () {
         await instance.connect(player1).playTicTacToe();
         await instance.connect(player2).playTicTacToe();
 
-        const gameId = await ticTacToeInstance.getGameId(player1Address);
+        await expect(instance.connect(player1).makeMove(9)).to.be.revertedWith("Cell is out of range");
+    });
 
-        await expect(instance.connect(player1).makeMove(gameId, 9)).to.be.revertedWith("Cell is out of range");
+    it("Player should not be able to make a move if they are not in a game", async function () {
+        await expect(instance.connect(player1).makeMove(0)).to.be.revertedWith("Game not found");
     });
 });
