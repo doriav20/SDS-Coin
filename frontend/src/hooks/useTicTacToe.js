@@ -77,8 +77,40 @@ function useTicTacToe() {
         });
     };
 
-    const handleClick = () => {}; //TODO
-    const handleJoinGame = () => {}; //TODO
+    const handleClick = async (index) => {
+        if (!contract) return;
+
+        // Check if it is possible (index and game state)
+        if (gameStatus !== GameStatus.YOUR_TURN) {
+            return;
+        }
+        if (board[index] !== null) {
+            return;
+        }
+
+        try {
+            await contract.makeMove(index);
+            setBoard((prevBoard) => {
+                const newBoard = [...prevBoard];
+                newBoard[index] = isPlayer1 ? 'X' : 'O';
+                return newBoard;
+            });
+        } catch (error) {
+            console.error('Error making move:', error);
+        }
+    };
+    const handleJoinGame = async () => {
+        const userConfirmed = window.confirm('Playing will cost 20 SDS. Do you want to proceed?');
+        if (!userConfirmed) {
+            return;
+        }
+
+        try {
+            await contract.playTicTacToe();
+        } catch (error) {
+            console.error('Error joining game:', error);
+        }
+    };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
