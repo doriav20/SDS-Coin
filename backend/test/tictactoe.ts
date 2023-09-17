@@ -204,4 +204,34 @@ describe("SDSToken", function () {
         expect(game2.isActive).to.equal(false);
         expect(game3.isActive).to.equal(true);
     });
+
+    it("Player should not be able to make a move to an occupied square", async function () {
+        await instance.connect(player1).playTicTacToe();
+        await instance.connect(player2).playTicTacToe();
+
+        const gameId = await ticTacToeInstance.getGameId(player1Address);
+
+        await instance.connect(player1).makeMove(gameId, 0);
+        await instance.connect(player2).makeMove(gameId, 4);
+
+        await expect(instance.connect(player1).makeMove(gameId, 4)).to.be.revertedWith("Cell is not empty");
+    });
+
+    it("Player should not be able to make a move if it is not their turn", async function () {
+        await instance.connect(player1).playTicTacToe();
+        await instance.connect(player2).playTicTacToe();
+
+        const gameId = await ticTacToeInstance.getGameId(player1Address);
+
+        await expect(instance.connect(player2).makeMove(gameId, 0)).to.be.revertedWith("Not your turn");
+    });
+
+    it("Player should not be able to make a move to an invalid square", async function () {
+        await instance.connect(player1).playTicTacToe();
+        await instance.connect(player2).playTicTacToe();
+
+        const gameId = await ticTacToeInstance.getGameId(player1Address);
+
+        await expect(instance.connect(player1).makeMove(gameId, 9)).to.be.revertedWith("Cell is out of range");
+    });
 });

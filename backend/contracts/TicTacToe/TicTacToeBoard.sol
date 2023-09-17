@@ -42,6 +42,12 @@ library TicTacToeBoard {
         // 3 4 5
         // 6 7 8
 
+        // Check if cell is empty
+        require((board & (3 << (cell * 2))) == 0, "Cell is not empty");
+
+        // Check if cell is in range
+        require(cell < 9, "Cell is out of range");
+
         uint8 player = getPlayer(board);
 
         // Set in board cell value for player
