@@ -80,7 +80,6 @@ function useTicTacToe() {
     const handleClick = async (index) => {
         if (!contract) return;
 
-        // Check if it is possible (index and game state)
         if (gameStatus !== GameStatus.YOUR_TURN) {
             return;
         }
