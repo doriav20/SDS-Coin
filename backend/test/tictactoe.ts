@@ -135,7 +135,7 @@ describe("SDSToken", function () {
         await instance.connect(player2).makeMove(5);
         await instance.connect(player1).makeMove(2);
 
-        await expect(instance.connect(player2).makeMove(8)).to.be.revertedWith("Game not found");
+        await expect(instance.connect(player2).makeMove(8)).to.be.revertedWith("Game is not active");
     });
 
     it("Player should not be able to make a move in a game that is not theirs", async function () {
