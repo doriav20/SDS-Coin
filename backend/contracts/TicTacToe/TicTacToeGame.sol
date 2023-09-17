@@ -32,7 +32,11 @@ contract TicTacToeGame {
     }
 
     function enterGame(address playerAddress) external {
-        require(playerGameIds[playerAddress] == 0, "You are already in a game");
+        require(
+            playerGameIds[playerAddress] == 0 ||
+                (!games[playerGameIds[playerAddress]].isActive && playerAddress != pendingPlayer),
+            "You are already in a game"
+        );
         require(token.balanceOf(playerAddress) >= ENTRY_FEE, "Insufficient token balance");
         require(token.transferFrom(playerAddress, address(this), ENTRY_FEE), "Token transfer failed");
 
@@ -79,8 +83,6 @@ contract TicTacToeGame {
     function finishGame(uint256 gameId, uint8 gameState) internal {
         Game storage game = games[gameId];
         game.isActive = false;
-        playerGameIds[game.player1] = 0;
-        playerGameIds[game.player2] = 0;
 
         if (gameState == 1) {
             // Player 1 wins
