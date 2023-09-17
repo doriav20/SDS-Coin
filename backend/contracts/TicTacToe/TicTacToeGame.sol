@@ -25,8 +25,7 @@ contract TicTacToeGame {
     address private pendingPlayer;
 
     event GameCreated(uint256 gameId, address player1, address player2, uint256 betAmount);
-    event GameFinished(uint256 gameId, address winner, address loser, uint256 betAmount);
-    event PlayerMoved(uint256 gameId, address player, uint8 cell);
+    event BoardChanged(uint256 indexed gameId, uint24 board);
 
     constructor(address _tokenAddress) {
         token = SDSToken(_tokenAddress);
@@ -69,7 +68,7 @@ contract TicTacToeGame {
         require(TicTacToeBoard.getPlayer(game.board) == (game.player1 == playerAddress ? 0 : 1), "Not your turn");
 
         game.board = TicTacToeBoard.move(game.board, cell);
-        emit PlayerMoved(gameId, playerAddress, cell);
+        emit BoardChanged(gameId, game.board);
 
         uint8 gameState = TicTacToeBoard.getState(game.board);
         if (gameState != 0) {
@@ -86,16 +85,13 @@ contract TicTacToeGame {
         if (gameState == 1) {
             // Player 1 wins
             token.transfer(game.player1, game.betAmount);
-            emit GameFinished(gameId, game.player1, game.player2, game.betAmount);
         } else if (gameState == 2) {
             // Player 2 wins
             token.transfer(game.player2, game.betAmount);
-            emit GameFinished(gameId, game.player2, game.player1, game.betAmount);
         } else {
             // It's a draw
             token.transfer(game.player1, game.betAmount / 2);
             token.transfer(game.player2, game.betAmount / 2);
-            emit GameFinished(gameId, address(0), address(0), game.betAmount);
         }
     }
 
