@@ -53,6 +53,9 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">You won!</p>
                     {boardComponent}
+                    <button className="join-game-button" onClick={handleJoinGame}>
+                        Join Game
+                    </button>
                 </div>
             );
             break;
@@ -61,6 +64,9 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">You lost!</p>
                     {boardComponent}
+                    <button className="join-game-button" onClick={handleJoinGame}>
+                        Join Game
+                    </button>
                 </div>
             );
             break;
@@ -69,6 +75,9 @@ function TicTacToeBoardDisplay() {
                 <div className="message-container">
                     <p className="message-text">Draw!</p>
                     {boardComponent}
+                    <button className="join-game-button" onClick={handleJoinGame}>
+                        Join Game
+                    </button>
                 </div>
             );
             break;
