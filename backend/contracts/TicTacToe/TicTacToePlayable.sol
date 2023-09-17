@@ -8,7 +8,6 @@ abstract contract TicTacToePlayable {
 
     constructor() {
         ticTacToeContract = new TicTacToeGame(address(this));
-        addOwner(address(ticTacToeContract));
     }
 
     function playTicTacToe() external {
