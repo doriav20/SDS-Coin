@@ -3,11 +3,16 @@ pragma solidity ^0.8.19;
 import { SDSToken } from "./SDSToken.sol";
 import { Randomizeble } from "./Randomizable.sol";
 
+//import "../node_modules/hardhat/console.sol";
+
 contract RouletteGame is Randomizeble {
     event GameResult(uint8 colorResult);
-    event BalanceDifferance(uint256 balDiff);
     SDSToken private token;
+    //uint256 constant private middlePoint = 49;
     uint8 private chosenColor;
+    uint8 private red = 0;
+    uint8 private green = 1;
+    uint8 private black = 2;
 
     constructor(address _tokenAddress) {
         token = SDSToken(_tokenAddress);
@@ -17,19 +22,23 @@ contract RouletteGame is Randomizeble {
     function playR(uint256 amount, uint8 color, address playerAddress) public {
         generateRandomNumber();
         uint256 rnd2 = (getRandomNumber() % 99) + 1; // From 1->99:)
-        if ((rnd2 < 49 && color == 0) || (rnd2 > 49 && color == 2)) {
-            uint256 previousBalance = token.balanceOf(playerAddress);
-            token.mint(playerAddress, amount);
-            require(previousBalance != token.balanceOf(playerAddress), "Mint Failed");
-            if (rnd2 < 49) {
-                chosenColor = 0;
-            } else {
-                chosenColor = 2;
+        uint256 previousBalance = token.balanceOf(playerAddress);
+
+        if (rnd2 < 49) {
+            chosenColor = red;
+        } else if (rnd2 == 49) {
+            chosenColor = green;
+        } else if (rnd2 > 49) {
+            chosenColor = black;
+        }
+        if (chosenColor == color) {
+            if (color == red || color == black) {
+                token.mint(playerAddress, amount);
+            } else if (color == green) {
+                token.mint(playerAddress, amount * 49); //50X the original betting
             }
-        } else if ((rnd2 == 49 && color == 1)) {
-            token.mint(playerAddress, amount * 49); //50X the original betting
-            chosenColor = 1;
-        } else if (color != chosenColor) {
+            require(previousBalance < token.balanceOf(playerAddress), "Mint Failed");
+        } else {
             bool transferSuccess = token.transferFrom(playerAddress, address(this), amount); //transfer to 0 / Burn
             require(transferSuccess, "Burn Not Successfull");
         }

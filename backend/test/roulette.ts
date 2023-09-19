@@ -7,7 +7,9 @@ describe("SDSToken", function () {
     let instance: SDSToken;
     let RouletteInstance: RouletteGame;
     let player1: HardhatEthersSigner;
-    //let player1Address: string;
+    let green = 1;
+    let red = 0;
+    let black = 2;
 
     beforeEach(async function () {
         const ContractFactory = await ethers.getContractFactory("SDSToken");
@@ -26,13 +28,14 @@ describe("SDSToken", function () {
     });
     it("A Winning player should get the tokens, and a losing player should lose his tokens", async function () {
         const amount_of_retries = 10;
-        const chosen_color = 2;
-        const betted_amount = 10;
+        const chosen_color = black;
+        const betted_amount = 10n;
         for (let i = 0; i < amount_of_retries; i++) {
             const balance_before_play = await instance.connect(player1).myBalance();
             await instance.connect(player1).playRoulette(betted_amount, chosen_color);
             const balance_after_play = await instance.connect(player1).myBalance();
             const resultColor = await RouletteInstance.getResult();
+            //console.log(resultColor + ":" + balance_before_play + "," + balance_after_play);
             expect(balance_before_play).to.not.equal(balance_after_play);
             if (chosen_color == resultColor) {
                 expect(balance_before_play).to.lessThan(balance_after_play);

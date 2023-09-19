@@ -46,7 +46,7 @@ describe("SDSToken", function () {
         expect(game.player1).to.equal(player1Address);
         expect(game.player2).to.equal(player2Address);
         expect(game.isActive).to.equal(true);
-        expect(game.betAmount).to.equal(40n * 10n ** 18n);
+        expect(game.betAmount).to.equal(40n * 10n ** (await instance.decimals()));
         expect(game.board).to.equal(0n);
     });
 
@@ -69,8 +69,8 @@ describe("SDSToken", function () {
 
         let player1Balance = await instance.balanceOf(player1Address);
         let player2Balance = await instance.balanceOf(player2Address);
-        expect(player1Balance).to.equal(80n * 10n ** 18n);
-        expect(player2Balance).to.equal(80n * 10n ** 18n);
+        expect(player1Balance).to.equal(80n * 10n ** (await instance.decimals()));
+        expect(player2Balance).to.equal(80n * 10n ** (await instance.decimals()));
 
         const gameId = await ticTacToeInstance.getGameId(player1Address);
 
@@ -88,8 +88,8 @@ describe("SDSToken", function () {
         // Check balances
         player1Balance = await instance.balanceOf(player1Address);
         player2Balance = await instance.balanceOf(player2Address);
-        expect(player1Balance).to.equal(120n * 10n ** 18n);
-        expect(player2Balance).to.equal(80n * 10n ** 18n);
+        expect(player1Balance).to.equal(120n * 10n ** (await instance.decimals()));
+        expect(player2Balance).to.equal(80n * 10n ** (await instance.decimals()));
     });
 
     it("Game should be a draw if no player wins", async function () {
@@ -98,8 +98,8 @@ describe("SDSToken", function () {
 
         let player1Balance = await instance.balanceOf(player1Address);
         let player2Balance = await instance.balanceOf(player2Address);
-        expect(player1Balance).to.equal(80n * 10n ** 18n);
-        expect(player2Balance).to.equal(80n * 10n ** 18n);
+        expect(player1Balance).to.equal(80n * 10n ** (await instance.decimals()));
+        expect(player2Balance).to.equal(80n * 10n ** (await instance.decimals()));
 
         const gameId = await ticTacToeInstance.getGameId(player1Address);
 
@@ -121,8 +121,8 @@ describe("SDSToken", function () {
         // Check balances
         player1Balance = await instance.balanceOf(player1Address);
         player2Balance = await instance.balanceOf(player2Address);
-        expect(player1Balance).to.equal(100n * 10n ** 18n);
-        expect(player2Balance).to.equal(100n * 10n ** 18n);
+        expect(player1Balance).to.equal(100n * 10n ** (await instance.decimals()));
+        expect(player2Balance).to.equal(100n * 10n ** (await instance.decimals()));
     });
 
     it("Player should not be able to make a move in a game that is not active", async function () {
