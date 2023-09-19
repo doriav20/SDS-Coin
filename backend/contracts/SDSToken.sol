@@ -26,8 +26,8 @@ contract SDSToken is SDSTokenStandard, Mintable, Randomizeble {
         ticTacToeContract.makeMove(msg.sender, cell);
     }
 
-    function playRoulette(uint256 amount, uint8 color) external {
-        require(balanceOf(msg.sender) >= amount, "You don't have enough tokens");
-        rouletteContract.playR(amount, color, msg.sender);
+    function playRoulette(uint256 amountOfRed, uint256 amountOfGreen, uint256 amountOfBlack) external {
+        require(balanceOf(msg.sender) >= amountOfRed + amountOfGreen + amountOfBlack, "You don't have enough tokens");
+        rouletteContract.playR(amountOfRed, amountOfGreen, amountOfBlack, msg.sender);
     }
 }
