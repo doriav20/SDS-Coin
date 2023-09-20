@@ -130,7 +130,7 @@ Got it! Here's the updated section with the note adjusted for clarity:
 From the `hardhat` directory:
 
 ```
-npx prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
+npx prettier --write --plugin=prettier-plugin-solidity "contracts/**/*.sol"
 ```
 
 **Note:** If you wish to check the format of Solidity files without applying changes, replace `--write` with `--check`
