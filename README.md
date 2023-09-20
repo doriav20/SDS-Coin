@@ -30,7 +30,7 @@ To setup the project, follow these steps:
 
 1. Navigate to the Hardhat directory:
     ```
-    cd hardhat
+    cd backend
     ```
 2. Install the required dependencies:
     ```
@@ -50,7 +50,7 @@ To setup the project, follow these steps:
 
 ## Running the Smart Contract
 
-1. From the `hardhat` directory, access your local filesystem from the Remix IDE:
+1. From the `backend` directory, access your local filesystem from the Remix IDE:
     ```
     npx remixd
     ```
@@ -81,7 +81,7 @@ From the `frontend` directory:
 
 ### Smart Contract Tests
 
-From the `hardhat` directory:
+From the `backend` directory:
 
 ```
 npm test
@@ -99,7 +99,7 @@ npm test
 
 ### Solidity Linting (Hardhat)
 
-From the `hardhat` directory:
+From the `backend` directory:
 
 ```
 npx solhint "contracts/**/*.sol"
@@ -107,7 +107,7 @@ npx solhint "contracts/**/*.sol"
 
 ### TypeScript Linting (Hardhat)
 
-From the `hardhat` directory:
+From the `backend` directory:
 
 ```
 npx eslint "**/*.ts"
@@ -127,10 +127,10 @@ Got it! Here's the updated section with the note adjusted for clarity:
 
 ### Solidity Formatting (Hardhat)
 
-From the `hardhat` directory:
+From the `backend` directory:
 
 ```
-npx prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'
+npx prettier --write --plugin=prettier-plugin-solidity "contracts/**/*.sol"
 ```
 
 **Note:** If you wish to check the format of Solidity files without applying changes, replace `--write` with `--check`
@@ -138,7 +138,7 @@ in the above command.
 
 ### TypeScript Formatting (Hardhat)
 
-From the `hardhat` directory:
+From the `backend` directory:
 
 ```
 npx prettier --write "**/*.ts"
