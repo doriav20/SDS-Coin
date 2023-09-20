@@ -18,20 +18,20 @@ contract RouletteGame is Randomizeble {
     //Colors are: 0 - Red ~49% chance, 1 - Green ~1% chance, 2 - Black ~49% chance
     function playR(uint256 amountOfRed, uint256 amountOfGreen, uint256 amountOfBlack, address playerAddress) public {
         generateRandomNumber();
-        uint256 rnd2 = (getRandomNumber() % 99) + 1; // From 1->99:)
+        uint256 rnd2 = (getRandomNumber() % 37) + 1; // From 1->99:)
         bool transferSuccess = token.transferFrom(
             playerAddress,
             address(this),
             amountOfRed + amountOfGreen + amountOfBlack
         ); //transfer to 0 / Burn
         require(transferSuccess, "Burn Not Successfull");
-        if (rnd2 < 49) {
+        if (rnd2 < 19) {
             chosenColor = red;
             token.mint(playerAddress, amountOfRed * 2);
-        } else if (rnd2 == 49) {
+        } else if (rnd2 == 19) {
             chosenColor = green;
-            token.mint(playerAddress, amountOfGreen * 50);
-        } else if (rnd2 > 49) {
+            token.mint(playerAddress, amountOfGreen * 35);
+        } else if (rnd2 > 19) {
             chosenColor = black;
             token.mint(playerAddress, amountOfBlack * 2);
         }
