@@ -33,8 +33,7 @@ function MainNavbar({ children }) {
 
                             <ActiveNavLink href="/tictactoe">Tic Tac Toe</ActiveNavLink>
 
-                            {/*TODO: Replace this after Game 2 is added*/}
-                            <ActiveNavLink href="/game2">Game 2</ActiveNavLink>
+                            <ActiveNavLink href="/roulette">Roulette</ActiveNavLink>
                         </Nav>
                     </Container>
                     {children}
