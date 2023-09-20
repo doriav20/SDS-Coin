@@ -8,7 +8,7 @@ contract TicTacToeGame {
     using TicTacToeBoard for uint24;
 
     SDSToken private token;
-    uint256 private constant ENTRY_FEE = 20 * 10 ** 18;
+    uint256 private constant ENTRY_FEE = 20;
 
     struct Game {
         uint24 board;

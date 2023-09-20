@@ -25,7 +25,7 @@ contract SDSTokenStandard {
     }
 
     function decimals() public pure returns (uint8) {
-        return 18;
+        return 0; // means everything is in the power of 0 meaning times 1
     }
 
     function owners() public view virtual returns (address[] memory) {
