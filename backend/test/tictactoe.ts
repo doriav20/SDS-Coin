@@ -6,7 +6,7 @@ import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 describe("SDSToken", function () {
     let instance: SDSToken;
     let ticTacToeInstance: TicTacToeGame;
-    let decim = 0;
+    const decim = 0n;
     let player1: HardhatEthersSigner;
     let player1Address: string;
     let player2: HardhatEthersSigner;
@@ -19,7 +19,6 @@ describe("SDSToken", function () {
 
         const gameAddress = await instance.ticTacToeContract();
         ticTacToeInstance = await ethers.getContractAt("TicTacToeGame", gameAddress);
-        decim = await instance.decimals();
         let otherSigners: HardhatEthersSigner[] = [];
         [player1, player2, ...otherSigners] = await ethers.getSigners();
         [player1Address, player2Address] = [await player1.getAddress(), await player2.getAddress()];
