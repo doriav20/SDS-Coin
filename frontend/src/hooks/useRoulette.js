@@ -1,36 +1,43 @@
 import { useEthereum } from './useEthereum';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { AbiCoder } from 'ethers';
 
-// const Color = Object.freeze({
-//     UNKNOWN: 0,
-//     RED: 1,
-//     BLACK: 2,
-//     GREEN: 3,
-// });
+export const Color = Object.freeze({
+    UNKNOWN: 0,
+    RED: 1,
+    GREEN: 2,
+    BLACK: 3,
+});
 
 function useRoulette() {
     const { contract } = useEthereum();
     const [lastResult, setLastResult] = useState(null);
 
-    const fetchLastResult = async () => {
-        if (contract) {
-            const playerLastResult = await contract.getRouletteResultForPlayer();
-            setLastResult(playerLastResult);
+    const playRoulette = async (amountOfRed, amountOfGreen, amountOfBlack) => {
+        if (!contract) return;
+        const tx = await contract.playRoulette(amountOfRed, amountOfGreen, amountOfBlack);
+        const receipt = await tx.wait();
+        const gameResultLog = receipt.logs[receipt.logs.length - 1];
+        const gameResult = AbiCoder.defaultAbiCoder().decode(['uint8'], gameResultLog.data)[0];
+        const parsedGameResult = numberToColor(Number(gameResult));
+        setLastResult(parsedGameResult);
+        return parsedGameResult;
+    };
+
+    const numberToColor = (number) => {
+        switch (number) {
+            case 1:
+                return Color.RED;
+            case 2:
+                return Color.GREEN;
+            case 3:
+                return Color.BLACK;
+            default:
+                return Color.UNKNOWN;
         }
     };
 
-    const handleClick = async () => {
-        if (!contract) return;
-        contract.playRoulette().then(() => {
-            fetchLastResult();
-        });
-    };
-
-    useEffect(() => {
-        fetchLastResult();
-    }, [contract]);
-
-    return { lastResult, handleClick };
+    return { lastResult, playRoulette };
 }
 
 export default useRoulette;
