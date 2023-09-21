@@ -10,8 +10,9 @@ export default function useMint100() {
         if (contract) {
             if (canMint100) {
                 await contract.mint100();
+            } else {
+                console.error('Mint 100 is not available');
             }
-            console.error('Mint 100 is not available yet');
         }
     };
 
