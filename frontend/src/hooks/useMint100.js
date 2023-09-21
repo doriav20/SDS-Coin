@@ -24,6 +24,7 @@ export default function useMint100() {
             }
         }
 
+        fetchCanMint100();
         const intervalId = setInterval(fetchCanMint100, secondsToMilliseconds(30));
         return () => clearInterval(intervalId);
     }, [contract]);
