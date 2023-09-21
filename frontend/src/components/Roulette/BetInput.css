@@ -1,21 +1,20 @@
-/* Input styles for "Amount of Red" */
 .amount-of-red-input {
-    background-color: #D61A2B;
+    background-color: #DF3428;
     color: white;
     border-color: red;
     padding-right: 10px;
 }
 
 .amount-of-green-input {
-    background-color: #00796B;
+    background-color: #006900;
     color: white;
-    border-color: #00A08D;
+    border-color: #008F00;
     padding-right: 10px;
 }
 
-.amount-of-yellow-input {
-    background-color: #FFD700;
-    color: black;
+.amount-of-black-input {
+    background-color: #3E3E3E;
+    color: white;
     border-color: rgb(128, 128, 128);
     padding-right: 10px;
 }

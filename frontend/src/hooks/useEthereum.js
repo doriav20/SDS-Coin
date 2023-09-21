@@ -22,7 +22,7 @@ export function EthereumProvider({ children }) {
                 setContract(newContract);
             })
             .catch(() => {
-                alert('Please allow access for the app to work');
+                // alert('Please allow access for the app to work');
                 setProvider(null);
                 setSigner(null);
                 setContract(null);
