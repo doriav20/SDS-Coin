@@ -14,7 +14,7 @@ function useRoulette() {
     const [lastResult, setLastResult] = useState(null);
 
     const playRoulette = async (amountOfRed, amountOfGreen, amountOfBlack) => {
-        if (!contract) return Color.RED;
+        if (!contract) return Color.UNKNOWN;
         const tx = await contract.playRoulette(amountOfRed, amountOfGreen, amountOfBlack);
         const receipt = await tx.wait();
         const gameResultLog = receipt.logs[receipt.logs.length - 1];
