@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Outlet, useLocation } from 'react-router-dom';
 import BalanceDisplay from '../EthereumAccountDetails/BalanceDisplay';
+import MintButton from '../Mint100Button/Mint100Button';
 
 function ActiveNavLink({ children, href, ...props }) {
     const location = useLocation();
@@ -47,7 +48,12 @@ export default function AppNavbar() {
     return (
         <>
             <MainNavbar>
-                <BalanceDisplay currency={'SDS'} className="text-light me-3 fs-5" />
+                <MintButton />
+                <BalanceDisplay
+                    currency={'SDS'}
+                    className="d-grid align-items-center text-light ms-auto me-3 fs-5"
+                    style={{ whiteSpace: 'nowrap' }}
+                />
             </MainNavbar>
             <Outlet />
         </>
