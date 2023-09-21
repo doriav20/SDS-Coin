@@ -165,6 +165,19 @@ export const ABI = [
         type: 'function',
     },
     {
+        inputs: [],
+        name: 'getRouletteResultForPlayer',
+        outputs: [
+            {
+                internalType: 'enum Color',
+                name: '',
+                type: 'uint8',
+            },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+    },
+    {
         inputs: [
             {
                 internalType: 'string',
@@ -274,10 +287,46 @@ export const ABI = [
         type: 'function',
     },
     {
+        inputs: [
+            {
+                internalType: 'uint256',
+                name: 'amountOfRed',
+                type: 'uint256',
+            },
+            {
+                internalType: 'uint256',
+                name: 'amountOfGreen',
+                type: 'uint256',
+            },
+            {
+                internalType: 'uint256',
+                name: 'amountOfBlack',
+                type: 'uint256',
+            },
+        ],
+        name: 'playRoulette',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
         inputs: [],
         name: 'playTicTacToe',
         outputs: [],
         stateMutability: 'nonpayable',
+        type: 'function',
+    },
+    {
+        inputs: [],
+        name: 'rouletteContract',
+        outputs: [
+            {
+                internalType: 'contract RouletteGame',
+                name: '',
+                type: 'address',
+            },
+        ],
+        stateMutability: 'view',
         type: 'function',
     },
     {
