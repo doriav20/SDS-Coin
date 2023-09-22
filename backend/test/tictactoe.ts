@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import { SDSToken, TicTacToeGame } from "../typechain-types";
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
-describe("SDSToken", function () {
+describe("TicTacToe", function () {
     let instance: SDSToken;
     let ticTacToeInstance: TicTacToeGame;
     const decim = 0n;

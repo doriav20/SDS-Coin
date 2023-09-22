@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import { SDSToken } from "../typechain-types";
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
 
-describe("SDSToken", function () {
+describe("Roulette", function () {
     let instance: SDSToken;
     let player1: HardhatEthersSigner;
     enum Color {
