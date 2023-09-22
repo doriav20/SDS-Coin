@@ -10,6 +10,7 @@ function RouletteDisplay() {
     return (
         <>
             <RouletteWheel amountOfRed={amountOfRed} amountOfGreen={amountOfGreen} amountOfBlack={amountOfBlack} />
+            <br />
             <BetInput
                 amountOfRed={amountOfRed}
                 setAmountOfRed={setAmountOfRed}
