@@ -1,13 +1,14 @@
 import '../../components/App/App.css';
+import RouletteDisplay from '../../components/Roulette/RouletteDisplay';
 
-function Game2() {
+function Roulette() {
     return (
         <div className="App">
             <div className="App-header">
-                <h1>Game 2 Placeholder</h1>
+                <RouletteDisplay />
             </div>
         </div>
     );
 }
 
-export default Game2;
+export default Roulette;
