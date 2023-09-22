@@ -15,7 +15,7 @@ abstract contract Randomizeble {
 
     function generateRandomNumber() public {
         (currentX, currentY) = currentX.getNewPoint(currentY);
-        rnd = uint256(keccak256(abi.encodePacked(currentX, currentY, rnd)));
+        rnd = uint256(keccak256(abi.encodePacked(currentX, currentY, rnd, block.timestamp)));
         emit RandomNumberGenerated(rnd);
     }
 
