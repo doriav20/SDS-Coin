@@ -1,3 +1,4 @@
+import './Wheel.css';
 import { Wheel } from 'react-custom-roulette';
 import useWheel from '../../hooks/useWheel';
 
